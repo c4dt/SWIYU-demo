@@ -7,10 +7,24 @@
     "dev": "nuxt dev",
     "generate": "nuxt generate",
     "preview": "nuxt preview",
-    "postinstall": "nuxt prepare"
+    "postinstall": "nuxt prepare",
+    "typecheck": "bun --bun vue-tsc --noEmit",
+    "lint": "eslint .",
+    "lint:fix": "eslint --fix .",
+    "format": "prettier --check .",
+    "format:fix": "prettier --write ."
   },
   "dependencies": {
+    "@headlessui/vue": "^1.7.23",
+    "@heroicons/vue": "^2.2.0",
+    "@nuxt/devtools": "^2.4.1",
+    "@nuxt/image": "^1.10.0",
+    "@tailwindcss/vite": "^4.1.6",
+    "axios": "^1.9.0",
     "nuxt": "^3.17.3",
+    "qrcode.vue": "^3.6.0",
+    "tailwindcss": "^4.1.6",
+    "typescript": "^5.8.3",
     "vue": "^3.5.13",
     "vue-router": "^4.5.1"
   }
