@@ -13,5 +13,10 @@ export default defineNuxtConfig({
   },
 
   css: ["~/assets/css/main.css"],
-  modules: ["@nuxt/image"]
+  modules: ["@nuxt/image"],
+  runtimeConfig: {
+    public: {
+      swiyuIssuerInternal: process.env.SWIYU_ISSUER_INTERNAL
+    }
+  }
 })

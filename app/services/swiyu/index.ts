@@ -1,18 +1,14 @@
 import axios from "axios";
 import type { DiplomaSchema } from "../VerifiableCredential";
+import { createApiClient } from "./api";
 
 
 export async function createSwiyuCredential(credentialData: DiplomaSchema): Promise<any> {
-    const client = axios.create({
-        baseURL: "http://localhost/internal/api/v1",
-        headers: {
-            'Content-Type': 'application/json'
-        }
-    });
+    const client = createApiClient();
 
     const response = await client.post('/credentials', {
         "metadata_credential_supported_id": [
-            "my-test-vc"
+            "monsters-uni"
         ],
         "credential_subject_data": {
             "signee": credentialData.signee,

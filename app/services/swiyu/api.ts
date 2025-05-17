@@ -1,11 +1,13 @@
 import axios from "axios";
+import { useRuntimeConfig } from "nuxt/app";
 
-export const createApiClient = (apiKey: string) => {
+const config = useRuntimeConfig();
+
+export const createApiClient = () => {
     return axios.create({
-        baseURL: "http://localhost:8081/api/v1",
+        baseURL: config.public.swiyuIssuerInternal as string,
         headers: {
             'Content-Type': 'application/json',
-            'X-API-KEY': apiKey
         }
     });
 };
