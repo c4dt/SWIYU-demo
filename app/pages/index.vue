@@ -56,6 +56,16 @@ import {
   LockClosedIcon,
 } from "@heroicons/vue/24/outline";
 
+useHead({
+  title: "E-ID Demo",
+  meta: [
+    {
+      name: "description",
+      content:
+        "A simple app portraying the process of Verifiable Credential exchange.",
+    },
+  ],
+});
 const features = [
   {
     name: "Issuer",
