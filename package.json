@@ -19,13 +19,13 @@
     "@heroicons/vue": "^2.2.0",
     "@nuxt/devtools": "^2.4.1",
     "@nuxt/image": "^1.10.0",
-    "@tailwindcss/vite": "^4.1.6",
+    "@tailwindcss/vite": "^4.1.7",
     "axios": "^1.9.0",
-    "nuxt": "^3.17.3",
+    "nuxt": "^3.17.4",
     "qrcode.vue": "^3.6.0",
-    "tailwindcss": "^4.1.6",
+    "tailwindcss": "^4.1.7",
     "typescript": "^5.8.3",
-    "vue": "^3.5.13",
+    "vue": "^3.5.14",
     "vue-router": "^4.5.1"
   }
 }
