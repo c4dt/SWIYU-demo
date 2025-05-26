@@ -49,7 +49,7 @@ const signee = computed(() => props.credentialData.signee);
 const deepLink = ref<string>("");
 const createdCredentialId = ref<string>("");
 
-setInterval(async () => {
+const checkStatusInterval = setInterval(async () => {
   if (createdCredentialId.value) {
     const { status } = await checkCredentialOfferStatus(
       createdCredentialId.value
@@ -58,7 +58,7 @@ setInterval(async () => {
       emit("addToLog", "QR code has been scanned!");
     } else if (status === "ISSUED") {
       emit("addToLog", "Credential offer has been accepted");
-      clearInterval(this);
+      clearInterval(checkStatusInterval);
     } else {
       console.log("Still figuring it out...");
     }
