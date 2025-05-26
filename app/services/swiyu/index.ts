@@ -1,4 +1,3 @@
-import axios from "axios";
 import type { DiplomaSchema } from "../VerifiableCredential";
 import { createApiClient } from "./api";
 
@@ -25,4 +24,13 @@ export async function createSwiyuCredential(credentialData: DiplomaSchema): Prom
         credentialId: response.data.management_id,
         credentialDeepLink: response.data.offer_deeplink,
     }
+}
+
+
+export async function checkCredentialOfferStatus(credentialId: string): Promise<any> {
+    const client = createApiClient();
+
+    const response = await client.get(`/credentials/${credentialId}/status`);
+    console.log(response.data);
+    return { status: response.data.status };
 }
