@@ -25,10 +25,11 @@
           Credential ID:
           <span class="font-mono">{{ createdCredentialId }}</span>
         </div>
+        <span>Pre-Authorization Code:</span>
         <span
           class="font-mono text-xs bg-gray-50 rounded-md p-2 max-w-xl mx-auto break-all select-all"
         >
-          URL: {{ deepLink }}
+          {{ getCredentialOfferPreAuthCode(deepLink) }}
         </span>
       </div>
     </div>
@@ -48,12 +49,18 @@ const signee = computed(() => props.credentialData.signee);
 
 const deepLink = ref<string>("");
 const createdCredentialId = ref<string>("");
-
+const credentialOfferStatus = ref<string>("OFFERED");
 const checkStatusInterval = setInterval(async () => {
   if (createdCredentialId.value) {
     const { status } = await checkCredentialOfferStatus(
       createdCredentialId.value
     );
+    if (status !== credentialOfferStatus.value) {
+      credentialOfferStatus.value = status;
+    } else {
+      console.log("No status change detected.");
+      return;
+    }
     if (status === "IN_PROGRESS") {
       emit("addToLog", "Credential offer token has been redeemed!");
     } else if (status === "ISSUED") {
@@ -74,4 +81,29 @@ const onGenerate = async (): Promise<void> => {
   deepLink.value = credentialDeepLink;
   emit("addToLog", "Offer Created - pulling status updates");
 };
+
+function getCredentialOfferPreAuthCode(url: string): object | null {
+  try {
+    // 1. Parse the URL and extract the search params
+    const urlObj = new URL(url);
+
+    // 2. Get the 'credential_offer' param (will be URL-encoded)
+    const encodedOffer = urlObj.searchParams.get("credential_offer");
+    if (!encodedOffer) {
+      throw new Error("No credential_offer parameter found.");
+    }
+
+    // 3. Decode URI component
+    const decodedOffer = decodeURIComponent(encodedOffer);
+
+    // 4. Parse as JSON
+    const credentialOfferObj = JSON.parse(decodedOffer);
+    return credentialOfferObj?.grants?.[
+      "urn:ietf:params:oauth:grant-type:pre-authorized_code"
+    ]?.["pre-authorized_code"];
+  } catch (err) {
+    console.error("Error decoding credential offer:", err);
+    return null;
+  }
+}
 </script>
