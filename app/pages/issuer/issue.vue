@@ -28,39 +28,15 @@
 
   <div class="flex mt-14 shadow-md min-h-[500px] rounded-xl bg-gray-50">
     <div class="flex-1 p-4 mt-10 ml-10">
+      <IssuerGenerateVC
+        v-if="stage !== Stage.CREDENTIAL_FORM"
+        @add-to-log="addToLog"
+        :credentialData="CredentialData"
+      />
       <IssuerDiplomaCredentialForm
-        v-if="step === Step.VC_FORM"
         @diploma-object-created="createCredentialData"
         @add-to-log="addToLog"
       />
-
-      <template v-else>
-        <div
-          class="container mx-auto max-w-4xl bg-white rounded-lg shadow-lg p-6 my-8 space-y-2 font-medium text-gray-700"
-        >
-          <p v-for="(value, key) in credentialDisplayData" :key="key">
-            {{ key }}: <span class="font-normal">{{ value }}</span>
-          </p>
-        </div>
-
-        <IssuerGenerateVC
-          v-if="step === Step.GENERATE_VC"
-          :credentialData="CredentialData"
-        />
-
-        <div
-          v-else-if="step === Step.SENDING_VC_TO_WALLET"
-          class="container mx-auto text-center"
-        >
-          <p>Connection established!</p>
-          <p>Connection ID: {{ connectionID }}</p>
-          <p>Sending Credential to wallet..</p>
-        </div>
-
-        <p v-else-if="step === Step.DONE" class="text-center">
-          Credential Successfully Sent to wallet
-        </p>
-      </template>
     </div>
 
     <div class="w-72 bg-gray-100 p-6 -mt-10 rounded-md shadow-lg">
@@ -79,57 +55,29 @@
 <script setup lang="ts">
 definePageMeta({ layout: "acme" });
 
-import type {
-  ActionLog,
-  DiplomaSchema,
-} from "~/services/VerifiableCredential";
+import type { ActionLog, DiplomaSchema } from "~/services/VerifiableCredential";
 
-enum Step {
-  VC_FORM,
-  GENERATE_VC,
-  SENDING_VC_TO_WALLET,
-  DONE,
+enum Stage {
+  CREDENTIAL_FORM,
+  CREDENTIAL_CREATED,
+  VC_OFFER_CREATED,
+  OFFER_ACCEPTED,
 }
 
-const step = ref<Step>(Step.VC_FORM);
+const stage = ref<Stage>(Stage.CREDENTIAL_FORM);
 const CredentialData = ref<DiplomaSchema>({} as DiplomaSchema);
-const connectionID = ref<string>("");
 const logMessages = ref<ActionLog[]>([]);
-
-const credentialDisplayData = computed(() => ({
-  Name: CredentialData.value.signee,
-  "Document Number": CredentialData.value.documentNumber,
-  Subject: CredentialData.value.subject,
-  Degree: CredentialData.value.degree,
-  "Date of Issue": CredentialData.value.dateOfIssue,
-  Message: CredentialData.value.body,
-}));
 
 function createCredentialData(createdCredential: DiplomaSchema): void {
   CredentialData.value = createdCredential;
-  step.value = Step.GENERATE_VC;
-  addToLog("Credential Data saved", "Issuer");
-}
-
-function SendCredentialToWallet(walletConnectionID: string): void {
-  addToLog("Accepted connection", "Wallet", "Issuer");
-  addToLog("Sending Credential", "Issuer", "Wallet");
-  connectionID.value = walletConnectionID;
-  step.value = Step.SENDING_VC_TO_WALLET;
-
-  GenerateVC(walletConnectionID, CredentialData.value).then(() => {
-    setTimeout(() => {
-      step.value = Step.DONE;
-    }, 2000);
-  });
-
-  addToLog("Credential received successfully!", "Wallet", "Issuer");
+  stage.value = Stage.CREDENTIAL_CREATED;
+  addToLog("Credential Data saved", "Issuer", "");
 }
 
 function addToLog(
   message: string,
   source: string = "Issuer",
-  target: string = "Wallet"
+  target?: string
 ): void {
   logMessages.value.push({ source, target, message });
 }
