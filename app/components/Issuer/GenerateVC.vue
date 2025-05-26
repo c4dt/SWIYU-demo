@@ -55,9 +55,9 @@ const checkStatusInterval = setInterval(async () => {
       createdCredentialId.value
     );
     if (status === "IN_PROGRESS") {
-      emit("addToLog", "QR code has been scanned!");
+      emit("addToLog", "Credential offer token has been redeemed!");
     } else if (status === "ISSUED") {
-      emit("addToLog", "Credential offer has been accepted");
+      emit("addToLog", "Credential was issued and received by wallet!");
       clearInterval(checkStatusInterval);
     } else {
       console.log("Still figuring it out...");
