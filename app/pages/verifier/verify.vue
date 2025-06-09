@@ -66,9 +66,12 @@
           </span>
         </div>
       </div>
-      <div v-if="step === Step.VERIFICATION_SUCCEEDED" class="text-green-600 text-center">
-        <h2 class="text-xl font-semibold mb-2">Verification Succeeded!</h2>
-        <p class="text-sm">The holder has successfully verified their credential.</p>
+      <div v-if="step === Step.VERIFICATION_SUCCEEDED">
+        <div class="text-green-600 text-center">
+          <h2 class="text-xl font-semibold mb-2">Verification Succeeded!</h2>
+          <p class="text-sm">The holder has successfully verified their credential.</p>
+        </div>
+        <KeyValueDisplay :data="disclosedData" />
       </div>
       <div v-if="step === Step.VERIFICATION_FAILED" class="text-red-600 text-center">
         <h2 class="text-xl font-semibold mb-2">Verification Failed!</h2>
@@ -132,12 +135,15 @@ async function createVerificationRequest(): Promise<void> {
   console.log("Verification URL:", verificationURL.value);
   submitting.value = false;
 }
+
+const disclosedData = ref<Record<string, unknown>>({});
 onMounted(() => {
   const checkStatusInterval = setInterval(async () => {
     if (verificationId.value) {
-      const { status } = await checkVerificationStatus(
+      let status = null;
+      ({ status, disclosedData: disclosedData.value } = await checkVerificationStatus(
         verificationId.value
-      );
+      ));
       if (status !== verificationRequestStatus.value) {
         verificationRequestStatus.value = status;
       } else {

@@ -95,5 +95,5 @@ export async function checkVerificationStatus(verificationId: string): Promise<a
 
     const response = await client.get(`/verifications/${verificationId}`);
     console.log(response.data);
-    return { status: response.data.state };
+    return { status: response.data.state, disclosedData: response.data.wallet_response.credential_subject_data };
 }
