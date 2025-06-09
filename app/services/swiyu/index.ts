@@ -85,7 +85,7 @@ export async function createSwiyuVerification(sd_fields: string[]): Promise<{ ve
         }
     });
     return {
-        verificationId: response.data.verification_id,
+        verificationId: response.data.id,
         verificationURL: response.data.verification_url
     }
 }
@@ -93,7 +93,7 @@ export async function createSwiyuVerification(sd_fields: string[]): Promise<{ ve
 export async function checkVerificationStatus(verificationId: string): Promise<any> {
     const client = createVerifierAPIClient();
 
-    const response = await client.get(`/verifications/${verificationId}/status`);
+    const response = await client.get(`/verifications/${verificationId}`);
     console.log(response.data);
-    return { status: response.data.status };
+    return { status: response.data.state };
 }

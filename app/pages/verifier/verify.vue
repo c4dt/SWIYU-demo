@@ -33,6 +33,7 @@
           </header>
           <div class="grid grid-cols-1 sm:grid-cols-6 gap-x-6 gap-y-8">
             <div class="sm:col-span-4">
+              <p v-if="!formIsValid" class="text-red-500 mt-2 text-sm">At least one must be selected.</p>
               <div class="flex flex-col gap-2">
                 <label v-for="option in fieldOptions" :key="option.value"
                   class="inline-flex items-center gap-2 cursor-pointer">
@@ -51,7 +52,7 @@
           </div>
         </form>
       </div>
-      <div v-if="verificationURL" class="flex flex-col items-center text-center">
+      <div v-if="step === Step.VERIFICATION_CREATED" class="flex flex-col items-center text-center">
         <span>Please scan this QR code to accept the verifiable credential!</span>
         <qrcode-vue class="mx-auto my-4" :value="verificationURL" level="H" size="250" render-as="svg" />
         <div class="break-all">
@@ -64,6 +65,14 @@
             {{ verificationURL }}
           </span>
         </div>
+      </div>
+      <div v-if="step === Step.VERIFICATION_SUCCEEDED" class="text-green-600 text-center">
+        <h2 class="text-xl font-semibold mb-2">Verification Succeeded!</h2>
+        <p class="text-sm">The holder has successfully verified their credential.</p>
+      </div>
+      <div v-if="step === Step.VERIFICATION_FAILED" class="text-red-600 text-center">
+        <h2 class="text-xl font-semibold mb-2">Verification Failed!</h2>
+        <p class="text-sm">The holder failed to verify their credential.</p>
       </div>
     </div>
     <aside class="w-72 bg-gray-300 p-6 -mt-10 rounded-md shadow-lg">
@@ -80,7 +89,7 @@
 import QrcodeVue from "qrcode.vue";
 
 import type { ActionLog } from "~/services/VerifiableCredential";
-import { createSwiyuVerification } from "~/services/swiyu/index";
+import { createSwiyuVerification, checkVerificationStatus } from "~/services/swiyu/index";
 const logMessages = ref<ActionLog[]>([]);
 
 function addToLog(message: string, source: string = "Issuer", target?: string): void {
@@ -90,19 +99,21 @@ function addToLog(message: string, source: string = "Issuer", target?: string): 
 enum Step {
   VERIFICATION_FORM,
   VERIFICATION_CREATED,
-  VERIFICATION_ACCEPTED
+  VERIFICATION_SUCCEEDED,
+  VERIFICATION_FAILED,
 }
 const step = ref<Step>(Step.VERIFICATION_FORM);
+const formIsValid = computed(() => selectedFields.value.length > 0);
 const verificationURL = ref<string>("");
 const verificationId = ref<string>("");
 const submitting = ref(false);
+const verificationRequestStatus = ref<string>("PENDING");
 const fieldOptions = [
   { label: 'Signee', value: 'signee' },
   { label: 'Subject', value: 'subject' },
   { label: 'Degree', value: 'degree' },
-  { label: 'Document Number', value: 'documentNumber' },
-  { label: 'Body', value: 'body' },
-  { label: 'Date Of Issue', value: 'dateOfIssue' },
+  { label: 'Document Number', value: 'document_number' },
+  { label: 'Date Of Issue', value: 'date_of_issue' },
 ]
 const selectedFields = ref<string[]>([])
 
@@ -121,6 +132,33 @@ async function createVerificationRequest(): Promise<void> {
   console.log("Verification URL:", verificationURL.value);
   submitting.value = false;
 }
+onMounted(() => {
+  const checkStatusInterval = setInterval(async () => {
+    if (verificationId.value) {
+      const { status } = await checkVerificationStatus(
+        verificationId.value
+      );
+      if (status !== verificationRequestStatus.value) {
+        verificationRequestStatus.value = status;
+      } else {
+        console.log("No status change detected.");
+        return;
+      }
+      if (status === "SUCCESS") {
+        clearInterval(checkStatusInterval);
+        addToLog("Verification request was fulfiled!");
+        step.value = Step.VERIFICATION_SUCCEEDED;
+      } else if (status === "FAILED") {
+        clearInterval(checkStatusInterval);
+        addToLog("Verification request failed to be fulfilled!");
+        step.value = Step.VERIFICATION_FAILED;
+      } else {
+        console.log("Still figuring it out...");
+      }
+    }
+  }, 1000);
+});
+
 
 
 definePageMeta({ layout: "leo-inc" });
