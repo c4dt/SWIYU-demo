@@ -1,9 +1,9 @@
 import axios from "axios";
 import { useRuntimeConfig } from "nuxt/app";
 
-const config = useRuntimeConfig();
 
 export const createApiClient = () => {
+    const config = useRuntimeConfig();
     return axios.create({
         baseURL: config.public.swiyuIssuerInternal as string,
         headers: {
@@ -11,3 +11,13 @@ export const createApiClient = () => {
         }
     });
 };
+
+export const createVerifierAPIClient = () => {
+    const config = useRuntimeConfig();
+    return axios.create({
+        baseURL: config.public.swiyuVerifierInternal as string,
+        headers: {
+            'Content-Type': 'application/json',
+        }
+    });
+}

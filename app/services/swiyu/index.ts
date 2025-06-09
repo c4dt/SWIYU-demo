@@ -1,6 +1,5 @@
 import type { DiplomaSchema } from "../VerifiableCredential";
-import { createApiClient } from "./api";
-
+import { createApiClient, createVerifierAPIClient } from "./api";
 
 export async function createSwiyuCredential(credentialData: DiplomaSchema): Promise<any> {
     const client = createApiClient();
@@ -31,6 +30,70 @@ export async function checkCredentialOfferStatus(credentialId: string): Promise<
     const client = createApiClient();
 
     const response = await client.get(`/credentials/${credentialId}/status`);
+    console.log(response.data);
+    return { status: response.data.status };
+}
+
+export async function createSwiyuVerification(sd_fields: string[]): Promise<{ verificationId: string, verificationURL: string }> {
+    const client = createVerifierAPIClient();
+    const sd_fields_array = sd_fields.map(field => {
+        return {
+            "path": [
+                `$.${field}`
+            ]
+        }
+    });
+    const response = await client.post(`/verifications`, {
+        "accepted_issuer_dids": [
+            "did:tdw:QmX9o7AbnJKZMUMhoXKEHzkcHH8mGwiwgxZFc9rFwHFism:identifier-reg.trust-infra.swiyu-int.admin.ch:api:v1:did:95df218d-30cf-4bf3-a864-8deb98ce3f63"
+        ],
+        "verification_validity_seconds": 86400,
+        "jwt_secured_authorization_request": true,
+        "presentation_definition": {
+            "id": "4ac0a851-464f-4714-9b2f-0480865a0799",
+            "name": "Verification for C4DT credential",  
+            "purpose": "We want to test a new Verifier",
+            "input_descriptors": [
+                {
+                    "id": "4ac0a851-464f-4714-9b2f-0480865a0799",
+                    "format": {
+                        "vc+sd-jwt": {
+                            "sd-jwt_alg_values": [
+                                "ES256"
+                            ],
+                            "kb-jwt_alg_values": [
+                                "ES256"
+                            ]
+                        }
+                    },
+                    "constraints": {
+                        "fields": [
+                            {
+                                "path": [
+                                    "$.vct"
+                                ],
+                                "filter": {
+                                    "type": "string",
+                                    "const": "monsters-uni"
+                                }
+                            },
+                            ...sd_fields_array
+                        ]
+                    }
+                }
+            ]
+        }
+    });
+    return {
+        verificationId: response.data.verification_id,
+        verificationURL: response.data.verification_url
+    }
+}
+
+export async function checkVerificationStatus(verificationId: string): Promise<any> {
+    const client = createVerifierAPIClient();
+
+    const response = await client.get(`/verifications/${verificationId}/status`);
     console.log(response.data);
     return { status: response.data.status };
 }
