@@ -16,7 +16,8 @@ export default defineNuxtConfig({
   modules: ["@nuxt/image"],
   runtimeConfig: {
     public: {
-      swiyuIssuerInternal: process.env.SWIYU_ISSUER_INTERNAL
+      swiyuIssuerInternal: process.env.SWIYU_ISSUER_INTERNAL,
+      swiyuVerifierInternal: process.env.SWIYU_VERIFIER_INTERNAL
     }
   }
 })
