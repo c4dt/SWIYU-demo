@@ -9,11 +9,22 @@ export default defineNuxtConfig({
   devtools: { enabled: true },
 
   vite: {
-    plugins: [tailwindcss()]
+    plugins: [tailwindcss()],
+    server: {
+      watch: {
+        usePolling: true,
+        interval: 2500
+      },
+      allowedHosts: ["swiyu.elghareeb.space", "localhost"]
+    }
   },
 
   css: ["~/assets/css/main.css"],
   modules: ["@nuxt/image"],
+  pinia: {
+    storesDirs: ['./stores/**', './app/stores/**'],
+  },
+
   runtimeConfig: {
     public: {
       swiyuIssuerInternal: process.env.SWIYU_ISSUER_INTERNAL,
