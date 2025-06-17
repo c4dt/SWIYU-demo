@@ -9,11 +9,19 @@ export default defineNuxtConfig({
   devtools: { enabled: true },
 
   vite: {
-    plugins: [tailwindcss()]
+    plugins: [tailwindcss()],
+    server: {
+      watch: {
+        usePolling: true,
+        interval: 2500
+      },
+      allowedHosts: ["eid.c4dt.org", "localhost"]
+    }
   },
 
   css: ["~/assets/css/main.css"],
   modules: ["@nuxt/image"],
+
   runtimeConfig: {
     public: {
       swiyuIssuerInternal: process.env.SWIYU_ISSUER_INTERNAL,

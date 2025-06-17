@@ -48,10 +48,10 @@ const pages = ref([
       "Manages Certification details, including creating new certifications, and monitoring existing ones.",
   },
   {
-    title: "Students",
-    url: "/issuer/students",
+    title: "C4DT Hands-On Workshop on E-ID",
+    url: "/issuer/from-identity",
     description:
-      "Manages Student Information and maintains their contact information.",
+      "Issues credentials for the C4DT hands-on workshop.",
   },
   {
     title: "Certificate Issuance",

@@ -22,7 +22,7 @@
           </NuxtLink>
           <span class="mx-2">/</span>
         </li>
-        <li class="flex items-center">Verify Credential</li>
+        <li class="flex items-center">C4DT Hands-On Workshop on E-ID</li>
       </ol>
     </nav>
   </div>
@@ -35,32 +35,26 @@
         <form @submit.prevent="createVerificationRequest">
           <header class="pb-6 border-b border-gray-200">
             <h2 class="text-base font-semibold text-gray-900">
-              Check which properties(?) you want the holder to disclose:
+              Obtain Your Workshop Credential
             </h2>
             <p class="mt-1 text-sm text-gray-600">
-              This form represents the ACME schools degree
-              EPFL_diploma_supplement:1.0.7 schema.
+              First step: Verify your identity
             </p>
           </header>
           <div class="grid grid-cols-1 sm:grid-cols-6 gap-x-6 gap-y-8">
             <div class="sm:col-span-4">
-              <p v-if="!formIsValid" class="text-red-500 mt-2 text-sm">
-                At least one must be selected.
+              <p class="text-red-500 mt-2 text-sm">
+                We ask for the following data:
               </p>
               <div class="flex flex-col gap-2">
-                <label
-                  v-for="option in fieldOptions"
-                  :key="option.value"
-                  class="inline-flex items-center gap-2 cursor-pointer"
-                >
-                  <input
-                    type="checkbox"
-                    class="form-checkbox accent-blue-600"
-                    :value="option.value"
-                    :checked="selectedFields.includes(option.value)"
-                    @change="() => toggleFieldChoice(option.value)"
-                  />
-                  <span>{{ option.label }}</span>
+                <label class="inline-flex items-center gap-2 cursor-pointer">
+                  - Name
+                </label>
+                <label class="inline-flex items-center gap-2 cursor-pointer">
+                  - Birth date
+                </label>
+                <label class="inline-flex items-center gap-2 cursor-pointer">
+                  - Wallet JWK
                 </label>
               </div>
             </div>
@@ -72,7 +66,7 @@
               class="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
             >
               {{
-                submitting ? "Generating..." : "Generate Verification QR Code!"
+                submitting ? "Generating..." : "Start the verification process!"
               }}
             </button>
           </div>
@@ -113,6 +107,14 @@
           </p>
         </div>
         <KeyValueDisplay :data="disclosedData" />
+        <div class="mt-6 flex items-center justify-center gap-x-6">
+          <button
+            type="button"
+            class="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+          >
+            Generate Credential for this identity?
+          </button>
+        </div>
       </div>
       <div
         v-if="step === Step.VERIFICATION_FAILED"
@@ -138,7 +140,7 @@ import QrcodeVue from "qrcode.vue";
 
 import type { ActionLog } from "~/services/VerifiableCredential";
 import {
-  createSwiyuVerification,
+  createSwiyuBetaIDVerification,
   checkVerificationStatus,
 } from "~/services/swiyu/index";
 const logMessages = ref<ActionLog[]>([]);
@@ -158,31 +160,17 @@ enum Step {
   VERIFICATION_FAILED,
 }
 const step = ref<Step>(Step.VERIFICATION_FORM);
-const formIsValid = computed(() => selectedFields.value.length > 0);
 const verificationURL = ref<string>("");
 const verificationId = ref<string>("");
 const submitting = ref(false);
 const verificationRequestStatus = ref<string>("PENDING");
-const fieldOptions = [
-  { label: "Signee", value: "signee" },
-  { label: "Subject", value: "subject" },
-  { label: "Degree", value: "degree" },
-  { label: "Document Number", value: "document_number" },
-  { label: "Date Of Issue", value: "date_of_issue" },
-];
-const selectedFields = ref<string[]>([]);
 
-const toggleFieldChoice = (val: string) => {
-  selectedFields.value = selectedFields.value.includes(val)
-    ? selectedFields.value.filter((v) => v !== val)
-    : [...selectedFields.value, val];
-};
 async function createVerificationRequest(): Promise<void> {
   submitting.value = true;
   ({
     verificationId: verificationId.value,
     verificationURL: verificationURL.value,
-  } = await createSwiyuVerification(selectedFields.value));
+  } = await createSwiyuBetaIDVerification());
   step.value = Step.VERIFICATION_CREATED;
   addToLog("Verification request created successfully.", "Verifier");
   // Here you would typically display the QR code or link to the user

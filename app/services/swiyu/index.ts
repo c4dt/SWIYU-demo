@@ -30,7 +30,6 @@ export async function checkCredentialOfferStatus(credentialId: string): Promise<
     const client = createApiClient();
 
     const response = await client.get(`/credentials/${credentialId}/status`);
-    console.log(response.data);
     return { status: response.data.status };
 }
 
@@ -51,7 +50,7 @@ export async function createSwiyuVerification(sd_fields: string[]): Promise<{ ve
         "jwt_secured_authorization_request": true,
         "presentation_definition": {
             "id": "4ac0a851-464f-4714-9b2f-0480865a0799",
-            "name": "Verification for C4DT credential",  
+            "name": "Verification for C4DT credential",
             "purpose": "We want to test a new Verifier",
             "input_descriptors": [
                 {
@@ -90,10 +89,71 @@ export async function createSwiyuVerification(sd_fields: string[]): Promise<{ ve
     }
 }
 
+
+export async function createSwiyuBetaIDVerification(): Promise<{ verificationId: string, verificationURL: string }> {
+    const client = createVerifierAPIClient();
+    const sd_fields_array = ["family_name", "document_number", "birth_date"].map(field => {
+        return {
+            "path": [
+                `$.${field}`
+            ]
+        }
+    });
+    const response = await client.post(`/verifications`, {
+        "accepted_issuer_dids": [
+            "did:tdw:QmRSJNTEM1PkmiD6fcfAFdZERmzqVkok6xwmx9XyvgckxX:identifier-reg-a.trust-infra.swiyu-int.admin.ch:api:v1:did:5caa5372-34b5-4a47-9744-55ba8e680ed0"
+        ],
+        "verification_validity_seconds": 86400,
+        "jwt_secured_authorization_request": true,
+        "presentation_definition": {
+            "id": "4ac0a851-464f-4714-9b2f-0480865a0799",
+            "name": "Verification for C4DT credential",
+            "purpose": "We want to test a new Verifier",
+            "input_descriptors": [
+                {
+                    "id": "4ac0a851-464f-4714-9b2f-0480865a0799",
+                    "format": {
+                        "vc+sd-jwt": {
+                            "sd-jwt_alg_values": [
+                                "ES256"
+                            ],
+                            "kb-jwt_alg_values": [
+                                "ES256"
+                            ]
+                        }
+                    },
+                    "constraints": {
+                        "fields": [
+                            {
+                                "path": [
+                                    "$.vct"
+                                ],
+                                "filter": {
+                                    "type": "string",
+                                    "const": "betaid-sdjwt"
+                                }
+                            },
+                            ...sd_fields_array
+                        ]
+                    }
+                }
+            ]
+        }
+    });
+    return {
+        verificationId: response.data.id,
+        verificationURL: response.data.verification_url
+    }
+}
+
+
 export async function checkVerificationStatus(verificationId: string): Promise<any> {
     const client = createVerifierAPIClient();
 
     const response = await client.get(`/verifications/${verificationId}`);
     console.log(response.data);
-    return { status: response.data.state, disclosedData: response.data.wallet_response.credential_subject_data };
+    if (response.data.state === 'SU') {
+        throw new Error(`Verification failed: ${response.data.error_message}`);
+    }
+    return { status: response.data.state, disclosedData: response.data.wallet_response };
 }
