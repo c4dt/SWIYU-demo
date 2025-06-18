@@ -47,6 +47,15 @@ in the `compose.yml` file.
 ## Using the app with a mobile wallet
 Use the SWIYU mobile wallet. Get them from [here](https://swiyu-admin-ch.github.io/open-source-components/#swiyu-android--ios-app).
 
-## Limitations
-### No holder-binding
-Currently, there are no holder-binding for the verifiable credentials. 
+## Holder binding
+TBD.
+
+## API documentation
+To see the API documentation of any of the SWIYU services, check the URI
+`SERVICE_URL/swagger-ui/index.html`  
+In this project, issuer management service would have this url for the documentation: `https://eid.c4dt.org/internal/issuer/swagger-ui/index.html`
+
+You will also need another change which is to change the API documentation url
+at the top of the page to `/internal/issuer/v3/api-docs/API`.  
+In this case, `/internal/issuer/` is used as an example, and should be replaced with
+the location of the desired service.
