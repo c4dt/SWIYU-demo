@@ -81,7 +81,7 @@
         </div>
         <KeyValueDisplay :data="disclosedData" />
         <div class="mt-6 flex items-center justify-center gap-x-6">
-          <button type="button"
+          <button @click="redirectToCredentialGeneration" type="button"
             class="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
             Generate Credential for this identity?
           </button>
@@ -146,7 +146,7 @@ async function createVerificationRequest(): Promise<void> {
   submitting.value = false;
 }
 
-const disclosedData = ref<Record<string, unknown>>({});
+const disclosedData = ref<Record<string, any>>({});
 onMounted(() => {
   const checkStatusInterval = setInterval(async () => {
     if (verificationId.value) {
@@ -173,6 +173,21 @@ onMounted(() => {
     }
   }, 2500);
 });
+
+function redirectToCredentialGeneration(): void {
+  console.log(disclosedData.value);
+  navigateTo({
+    path: "/issuer/from-identity/issue",
+    query: {
+      firstName: disclosedData.value.credential_subject_data.first_name,
+      lastName: disclosedData.value.credential_subject_data.family_name,
+      birthDate: disclosedData.value.credential_subject_data.birth_date,
+      betaId: disclosedData.value.credential_subject_data.beta_id,
+      cnf: JSON.stringify(disclosedData.value.credential_subject_data.cnf),
+    }
+  });
+  console.log("Redirecting to credential generation...");
+}
 
 definePageMeta({ layout: "leo-inc" });
 useHead({

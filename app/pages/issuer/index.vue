@@ -49,7 +49,7 @@ const pages = ref([
   },
   {
     title: "C4DT Hands-On Workshop on E-ID",
-    url: "/issuer/from-identity",
+    url: "/issuer/from-identity/verify",
     description:
       "Issues credentials for the C4DT hands-on workshop.",
   },
