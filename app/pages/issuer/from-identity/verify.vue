@@ -37,7 +37,7 @@
               </p>
               <div class="flex flex-col gap-2">
                 <label class="inline-flex items-center gap-2 cursor-pointer">
-                  - Name
+                  - Given Name & Surname
                 </label>
                 <label class="inline-flex items-center gap-2 cursor-pointer">
                   - Birth date

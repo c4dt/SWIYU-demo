@@ -92,7 +92,7 @@ export async function createSwiyuVerification(sd_fields: string[]): Promise<{ ve
 
 export async function createSwiyuBetaIDVerification(): Promise<{ verificationId: string, verificationURL: string }> {
     const client = createVerifierAPIClient();
-    const sd_fields_array = ["family_name", "document_number", "birth_date"].map(field => {
+    const sd_fields_array = ["given_name", "family_name", "document_number", "birth_date"].map(field => {
         return {
             "path": [
                 `$.${field}`
