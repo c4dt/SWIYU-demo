@@ -101,7 +101,7 @@ export async function createSwiyuBetaIDVerification(): Promise<{ verificationId:
     });
     const response = await client.post(`/verifications`, {
         "accepted_issuer_dids": [
-            "did:tdw:QmRSJNTEM1PkmiD6fcfAFdZERmzqVkok6xwmx9XyvgckxX:identifier-reg-a.trust-infra.swiyu-int.admin.ch:api:v1:did:5caa5372-34b5-4a47-9744-55ba8e680ed0"
+            "did:tdw:QmPEZPhDFR4nEYSFK5bMnvECqdpf1tPTPJuWs9QrMjCumw:identifier-reg.trust-infra.swiyu-int.admin.ch:api:v1:did:9a5559f0-b81c-4368-a170-e7b4ae424527"
         ],
         "verification_validity_seconds": 86400,
         "jwt_secured_authorization_request": true,
