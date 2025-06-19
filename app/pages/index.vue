@@ -1,15 +1,17 @@
 <template>
-  <section class="bg-white py-24 sm:py-32">
+  <section class="bg-white py-24 sm:py-8">
     <div class="mx-auto max-w-7xl px-6 lg:px-8">
       <header class="mx-auto max-w-2xl lg:text-center">
         <h1 class="text-base font-semibold leading-7 text-indigo-600">
           E-ID Demo
         </h1>
         <p class="mt-2 text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
-          A simple app portraying the process of Verifiable Credential exchange
+          A demo app portraying the process of Verifiable Credential exchange
         </p>
         <p class="mt-6 text-lg leading-8 text-gray-600">
-          The demo includes a simplified issuer and verifier
+          The demo includes simple issuer and verifier developed specifically for the
+          SWIYU project, which is a part of the E-ID initiative by the Swiss Federal Office of Information Technology,
+          Systems and Telecommunication (FOITT).
         </p>
       </header>
 
@@ -54,19 +56,19 @@ const features = [
   {
     name: "Issuer",
     description:
-      "Entity that issues the credentials by signing them. In our example, the issuer is C4DT." +
+      "An actor that issues the credentials by sharing them in a standard format" +
+      " signing them. In our example, the issuer is C4DT." +
       "The public key and the schemas used by the issuer are stored on the ledger.",
     icon: CloudArrowUpIcon,
     url: "/issuer",
   },
   {
-    name: "Ledger",
+    name: "Base & Trust Registries",
     description:
-      "The ledger is the 'trust anchor' of the system. It stores the public keys of the " +
-      "issuers, as well as the schemas and revocation registries." +
-      " It is the reference used by verifiers to verify the signatures of the credentials.",
+      "Reposible for storing the public keys/ DIDs of the actors, and revocation registries." +
+      "The trust registry is responsible for certifying the authenticity of the actors.",
     icon: LockClosedIcon,
-    url: "https://explorer.sandbox.ssi.ch/home/SANDBOX",
+    url: "https://swiyu-admin-ch.github.io/introduction/#registries",
   },
   {
     name: "Wallet",
@@ -75,12 +77,12 @@ const features = [
       "It also prepares the credentials and presents them to the verifier." +
       "In our example, the wallet holds the diplomas of the student.",
     icon: ArrowPathIcon,
-    url: "https://github.com/e-id-admin/public-sandbox-trustinfrastructure/discussions/17",
+    url: "https://swiyu-admin-ch.github.io/open-source-components/#swiyu-android--ios-app",
   },
   {
     name: "Verifier",
     description:
-      "Entity that verifies credentials. In our example, the verifier is Leo Inc.",
+      "An actor that verifies credentials. In our example, the verifier is Leo Inc.",
     icon: FingerPrintIcon,
     url: "/verifier",
   },
