@@ -1,10 +1,10 @@
 export interface DiplomaSchema {
-  signee: string;
-  subject: string;
-  degree: string;
-  documentNumber: string;
-  body: string;
+  firstName: string;
+  lastName: string;
+  birthDate: string;
   dateOfIssue: string;
+  betaIdDocumentNumber: string;
+  betaIdCnf: string;
 }
 
 export interface ActionLog {

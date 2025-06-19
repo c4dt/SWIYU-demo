@@ -6,14 +6,15 @@ export async function createSwiyuCredential(credentialData: DiplomaSchema): Prom
 
     const response = await client.post('/credentials', {
         "metadata_credential_supported_id": [
-            "monsters-uni"
+            "e-id-how-06-2025"
         ],
         "credential_subject_data": {
-            "signee": credentialData.signee,
-            "degree": credentialData.degree,
-            "document_number": credentialData.documentNumber,
-            "subject": credentialData.subject,
-            "date_of_issue": credentialData.dateOfIssue
+            "firstName": credentialData.firstName,
+            "lastName": credentialData.lastName,
+            "birthDate": credentialData.birthDate,
+            "dateOfIssue": credentialData.dateOfIssue,
+            "betaIdDocumentNumber": credentialData.betaIdDocumentNumber,
+            "betaIdCnf": credentialData.betaIdCnf,
         },
         "offer_validity_seconds": 86400,
         "credential_valid_until": "2030-01-01T19:23:24Z",
@@ -73,7 +74,7 @@ export async function createSwiyuVerification(sd_fields: string[]): Promise<{ ve
                                 ],
                                 "filter": {
                                     "type": "string",
-                                    "const": "monsters-uni"
+                                    "const": "e-id-how-06-2025"
                                 }
                             },
                             ...sd_fields_array

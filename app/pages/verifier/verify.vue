@@ -76,13 +76,6 @@
             The holder has successfully verified their credential.
           </p>
         </div>
-        <KeyValueDisplay :data="disclosedData" />
-        <div class="mt-6 flex items-center justify-center gap-x-6">
-          <button type="button"
-            class="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
-            Generate Credential for this identity?
-          </button>
-        </div>
       </div>
       <div v-if="step === Step.VERIFICATION_FAILED" class="text-red-600 text-center">
         <h2 class="text-xl font-semibold mb-2">Verification Failed!</h2>
@@ -130,11 +123,11 @@ const verificationId = ref<string>("");
 const submitting = ref(false);
 const verificationRequestStatus = ref<string>("PENDING");
 const fieldOptions = [
-  { label: "Signee", value: "signee" },
-  { label: "Subject", value: "subject" },
-  { label: "Degree", value: "degree" },
-  { label: "Document Number", value: "document_number" },
-  { label: "Date Of Issue", value: "date_of_issue" },
+  { label: "First Name", value: "firstName" },
+  { label: "Last Name", value: "lastName" },
+  { label: "Date of Birth", value: "birthDate" },
+  { label: "Document Issuance date", value: "dateOfIssue" },
+  { label: "Gov ID Document Number", value: "betaIdDocumentNumber" },
 ];
 const selectedFields = ref<string[]>([]);
 

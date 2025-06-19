@@ -13,125 +13,106 @@
       </header>
 
       <div class="grid grid-cols-1 sm:grid-cols-6 gap-x-6 gap-y-8">
-        <div class="sm:col-span-4">
-          <label for="signee" class="block text-sm font-medium text-gray-900">
-            Name
+        <div class="sm:col-span-2">
+          <label for="firstName" class="block text-sm font-medium text-gray-900">
+            First Name
           </label>
           <div class="mt-2">
-            <input
-              v-model="model.signee"
-              id="signee"
-              name="signee"
-              type="text"
-              autocomplete="off"
-              class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm"
-            />
+            <input v-model="model.firstName" id="firstName" name="firstName" disabled type="text" autocomplete="off"
+              class="
+              block w-full rounded-md border-0 py-1.5
+              text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300
+              placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600
+              sm:text-sm
+              disabled:bg-gray-100 disabled:text-gray-500 disabled:ring-gray-200
+              disabled:cursor-not-allowed
+              ">
           </div>
         </div>
         <div class="sm:col-span-2">
-          <label
-            for="documentNumber"
-            class="block text-sm font-medium text-gray-900"
-            >Document Number</label
-          >
+          <label for="lastName" class="block text-sm font-medium text-gray-900">
+            Last Name
+          </label>
           <div class="mt-2">
-            <input
-              v-model="model.documentNumber"
-              id="documentNumber"
-              name="documentNumber"
-              type="text"
-              class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm"
-            />
+            <input v-model="model.lastName" id="lastName" name="lastName" disabled type="text" autocomplete="off" class="
+              block w-full rounded-md border-0 py-1.5
+              text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300
+              placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600
+              sm:text-sm
+              disabled:bg-gray-100 disabled:text-gray-500 disabled:ring-gray-200
+              disabled:cursor-not-allowed
+              ">
           </div>
         </div>
-        <div class="sm:col-span-3">
-          <label for="subject" class="block text-sm font-medium text-gray-900"
-            >Subject</label
-          >
+        <div class="sm:col-span-2">
+          <label for="birthDate" class="block text-sm font-medium text-gray-900">Date of birth</label>
           <div class="mt-2">
-            <input
-              v-model="model.subject"
-              id="subject"
-              name="subject"
-              type="text"
-              class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm"
-            />
+            <input v-model="model.birthDate" id="birthDate" name="birthDate" disabled type="text" autocomplete="off"
+              class="
+              block w-full rounded-md border-0 py-1.5
+              text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300
+              placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600
+              sm:text-sm
+              disabled:bg-gray-100 disabled:text-gray-500 disabled:ring-gray-200
+              disabled:cursor-not-allowed
+              ">
           </div>
         </div>
-        <div class="sm:col-span-1">
-          <label for="degree" class="block text-sm font-medium text-gray-900"
-            >Degree</label
-          >
+        <div class="sm:col-span-2">
+          <label for="dateOfIssue" class="block text-sm font-medium text-gray-900">Date of issue</label>
           <div class="mt-2">
-            <select
-              v-model="model.degree"
-              id="degree"
-              name="degree"
-              class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm"
-            >
-              <option
-                v-for="option in degreeOptions"
-                :key="option"
-                :value="option"
-              >
-                {{ option }}
-              </option>
-            </select>
+            <input v-model="model.dateOfIssue" id="dateOfIssue" name="dateOfIssue" type="dateOfIssue" disabled class="
+              block w-full rounded-md border-0 py-1.5
+              text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300
+              placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600
+              sm:text-sm
+              disabled:bg-gray-100 disabled:text-gray-500 disabled:ring-gray-200
+              disabled:cursor-not-allowed
+              ">
           </div>
         </div>
-        <div class="sm:col-span-1">
-          <label
-            for="dateOfIssue"
-            class="block text-sm font-medium text-gray-900"
-            >Date of issue</label
-          >
+        <div class="sm:col-span-2">
+          <label for="betaIdDocumentNumber" class="block text-sm font-medium text-gray-900">Beta ID Document
+            Number</label>
           <div class="mt-2">
-            <input
-              v-model="model.dateOfIssue"
-              id="dateOfIssue"
-              name="dateOfIssue"
-              type="date"
-              class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm"
-            />
+            <input v-model="model.betaIdDocumentNumber" id="betaIdDocumentNumber" name="betaIdDocumentNumber"
+              type="text" disabled class="
+              block w-full rounded-md border-0 py-1.5
+              text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300
+              placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600
+              sm:text-sm
+              disabled:bg-gray-100 disabled:text-gray-500 disabled:ring-gray-200
+              disabled:cursor-not-allowed
+              ">
           </div>
         </div>
-        <div class="sm:col-span-6">
-          <label for="body" class="block text-sm font-medium text-gray-900"
-            >Message</label
-          >
+        <div class="sm:col-span-4">
+          <label for="betaIdCnf" class="block text-sm font-medium text-gray-900">CNF data</label>
           <div class="mt-2">
-            <input
-              v-model="model.body"
-              id="body"
-              name="body"
-              type="text"
-              class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm"
-            />
+            <input v-model="model.betaIdCnf" id="betaIdCnf" name="betaIdCnf" type="text" disabled class="
+              block w-full rounded-md border-0 py-1.5
+              text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300
+              placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600
+              sm:text-sm
+              disabled:bg-gray-100 disabled:text-gray-500 disabled:ring-gray-200
+              disabled:cursor-not-allowed
+              ">
           </div>
         </div>
       </div>
     </section>
     <div class="mt-6 flex items-center justify-end gap-x-6">
-      <button
-        type="button"
-        class="text-sm font-semibold text-gray-900"
-        @click="reset"
-      >
+      <button type="button" class="text-sm font-semibold text-gray-900" @click="reset">
         Cancel
       </button>
-      <button
-        type="submit"
-        :disabled="submitting"
-        class="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-      >
+      <button type="submit" :disabled="submitting"
+        class="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
         {{ submitting ? "Saving..." : "Save" }}
       </button>
     </div>
   </form>
-  <div
-    v-else
-    class="container mx-auto max-w-4xl bg-white rounded-lg shadow-lg p-6 my-8 space-y-2 font-medium text-gray-700"
-  >
+  <div v-else
+    class="container mx-auto max-w-4xl bg-white rounded-lg shadow-lg p-6 my-8 space-y-2 font-medium text-gray-700">
     <p v-for="(value, key) in model" :key="key">
       {{ key }}: <span class="font-normal">{{ value }}</span>
     </p>
@@ -147,13 +128,16 @@ const degreeOptions = ["A+", "A-", "B+", "B-", "C+", "C-"];
 const emit = defineEmits(["diploma-object-created"]);
 const fillingForm = ref(true);
 
+
+const route = useRoute()
+
 const model = reactive<DiplomaSchema>({
-  signee: "Ahmed E.",
-  documentNumber: "A001",
-  subject: "Mathematics",
-  degree: "A+",
-  dateOfIssue: "2013-09-01",
-  body: "Congrats!",
+  firstName: route.query.firstName as string,
+  lastName: route.query.lastName as string,
+  birthDate: route.query.birthDate as string,
+  dateOfIssue: new Date().toDateString(),
+  betaIdDocumentNumber: route.query.betaIdDocumentNumber as string,
+  betaIdCnf: route.query.betaIdCnf as string,
 });
 
 const submitting = ref(false);

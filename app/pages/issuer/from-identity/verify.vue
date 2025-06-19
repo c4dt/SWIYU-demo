@@ -179,11 +179,11 @@ function redirectToCredentialGeneration(): void {
   navigateTo({
     path: "/issuer/from-identity/issue",
     query: {
-      firstName: disclosedData.value.credential_subject_data.first_name,
+      firstName: disclosedData.value.credential_subject_data.given_name,
       lastName: disclosedData.value.credential_subject_data.family_name,
       birthDate: disclosedData.value.credential_subject_data.birth_date,
-      betaId: disclosedData.value.credential_subject_data.beta_id,
-      cnf: JSON.stringify(disclosedData.value.credential_subject_data.cnf),
+      betaIdDocumentNumber: disclosedData.value.credential_subject_data.document_number,
+      betaIdCnf: JSON.stringify(disclosedData.value.credential_subject_data.cnf),
     }
   });
   console.log("Redirecting to credential generation...");

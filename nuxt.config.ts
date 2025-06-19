@@ -15,7 +15,7 @@ export default defineNuxtConfig({
         usePolling: true,
         interval: 2500
       },
-      allowedHosts: ["eid.c4dt.org", "localhost"]
+      allowedHosts: ["swiyu.elghareeb.space", "localhost"]
     }
   },
 

@@ -34,7 +34,7 @@ import { checkCredentialOfferStatus } from "~/services/swiyu";
 const props = defineProps(["credentialData"]);
 const emit = defineEmits(["addToLog"]);
 
-const signee = computed(() => props.credentialData.signee);
+const signee = computed(() => props.credentialData.firstName + " " + props.credentialData.lastName);
 
 const deepLink = ref<string>("");
 const createdCredentialId = ref<string>("");
@@ -59,7 +59,7 @@ const checkStatusInterval = setInterval(async () => {
       console.log("Still figuring it out...");
     }
   }
-}, 1000);
+}, 2500);
 
 const onGenerate = async (): Promise<void> => {
   emit("addToLog", "Creating VC offer QRCode");
