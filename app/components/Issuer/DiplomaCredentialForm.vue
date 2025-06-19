@@ -6,8 +6,9 @@
           Credential Information
         </h2>
         <p class="mt-1 text-sm text-gray-600">
-          This form represents the ACME schools degree
-          EPFL_diploma_supplement:1.0.7 schema.
+          This credential is verifiable credential issued by C4DT.
+          <br />
+          Disclaimer: This is a toy credential for the C4DT hands-on workshop on E-ID.
         </p>
       </header>
 

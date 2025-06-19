@@ -2,33 +2,22 @@
   <div class="flex flex-col items-center gap-y-8">
     <div class="flex items-center gap-x-6">
       <p>Generate Verifiable Credential for {{ signee }}?</p>
-      <button
-        type="button"
-        @click="onGenerate"
-        class="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-      >
+      <button type="button" @click="onGenerate"
+        class="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
         Generate
       </button>
     </div>
 
     <div v-if="deepLink" class="flex flex-col items-center text-center">
       <span>Please scan this QR code to accept the verifiable credential!</span>
-      <qrcode-vue
-        class="mx-auto my-4"
-        :value="deepLink"
-        level="H"
-        size="250"
-        render-as="svg"
-      />
+      <qrcode-vue class="mx-auto my-4" :value="deepLink" level="H" size="250" render-as="svg" />
       <div class="break-all">
         <div>
           Credential ID:
           <span class="font-mono">{{ createdCredentialId }}</span>
         </div>
         <span>Pre-Authorization Code:</span>
-        <span
-          class="font-mono text-xs bg-gray-50 rounded-md p-2 max-w-xl mx-auto break-all select-all"
-        >
+        <span class="font-mono text-xs bg-gray-50 rounded-md p-2 max-w-xl mx-auto break-all select-all">
           {{ getCredentialOfferPreAuthCode(deepLink) }}
         </span>
       </div>

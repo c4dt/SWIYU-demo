@@ -3,5 +3,5 @@
 </template>
 
 <script setup lang="ts">
-definePageMeta({ layout: "acme" });
+definePageMeta({ layout: "c4dt" });
 </script>

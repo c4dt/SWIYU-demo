@@ -3,13 +3,11 @@
     <div class="max-w-xl mx-auto text-center">
       <div class="inline-flex px-4 py-1.5 mx-auto rounded-full">
         <p class="text-4xl font-semibold tracking-widest text-g uppercase">
-          ACME Schools HR system
+          C4DT super HR system
         </p>
-        for graduate affairs
       </div>
       <p class="mt-4 text-base leading-relaxed text-gray-600 group-hover:text-white">
-        This platform provides different activities for ACME Schools HR
-        department.
+        This platform provides different activities for C4DT HR management.
       </p>
     </div>
     <div class="grid grid-cols-1 gap-2 mt-12 sm:grid-cols-3 lg:mt-20">
@@ -32,7 +30,7 @@
 </template>
 
 <script setup lang="ts">
-definePageMeta({ layout: "acme" });
+definePageMeta({ layout: "c4dt" });
 const pages = ref([
   {
     title: "Internal Certification Management",
@@ -48,7 +46,7 @@ const pages = ref([
   },
   {
     title: "Certificate Issuance",
-    url: "/issuer/issue",
+    url: "/issuer/certification",
     description:
       "Issue certificates upon request by students.\n" +
       "These certificates can be verified by third parties.",

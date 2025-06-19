@@ -1,7 +1,7 @@
 <script setup lang="ts">
-definePageMeta({layout: 'acme'})
+definePageMeta({ layout: 'c4dt' })
 </script>
 
 <template>
-  <NotImplemented homePageURL="/issuer"/>
+  <NotImplemented homePageURL="/issuer" />
 </template>

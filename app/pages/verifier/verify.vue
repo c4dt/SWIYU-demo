@@ -27,8 +27,7 @@
               Check which properties(?) you want the holder to disclose:
             </h2>
             <p class="mt-1 text-sm text-gray-600">
-              This form represents the ACME schools degree
-              EPFL_diploma_supplement:1.0.7 schema.
+              This form represents the C4DT toy certification
             </p>
           </header>
           <div class="grid grid-cols-1 sm:grid-cols-6 gap-x-6 gap-y-8">
