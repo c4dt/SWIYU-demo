@@ -62,13 +62,14 @@ const checkStatusInterval = setInterval(async () => {
 }, 2500);
 
 const onGenerate = async (): Promise<void> => {
-  emit("addToLog", "Creating VC offer QRCode");
+  emit("addToLog", "Creating VC offer QR code");
   const { credentialId, credentialDeepLink } = await createSwiyuCredential(
     props.credentialData
   );
   createdCredentialId.value = credentialId;
   deepLink.value = credentialDeepLink;
-  emit("addToLog", "Offer Created - pulling status updates");
+  emit("addToLog", "Offer Created!");
+  emit("addToLog", "Periodically checking credential for QR code scanning.");
 };
 
 function getCredentialOfferPreAuthCode(url: string): object | null {

@@ -139,10 +139,8 @@ async function createVerificationRequest(): Promise<void> {
     verificationURL: verificationURL.value,
   } = await createSwiyuBetaIDVerification());
   step.value = Step.VERIFICATION_CREATED;
-  addToLog("Verification request created successfully.", "Verifier");
-  // Here you would typically display the QR code or link to the user
-  // For example, you could use a QR code component to show the verification URL
-  console.log("Verification URL:", verificationURL.value);
+  addToLog("Verification request created.", "Verifier");
+  addToLog("Checking periodically for user scanning.", "Verifier");
   submitting.value = false;
 }
 
@@ -159,9 +157,12 @@ onMounted(() => {
         console.log("No status change detected.");
         return;
       }
+      addToLog("Verifies DID of verifier through base registry!", "Wallet");
+      addToLog("retrieves verified actor status from trust registry!", "Wallet");
+
       if (status === "SUCCESS") {
         clearInterval(checkStatusInterval);
-        addToLog("Verification request was fulfiled!");
+        addToLog("received VC with a valid signature!", "Verifier");
         step.value = Step.VERIFICATION_SUCCEEDED;
       } else if (status === "FAILED") {
         clearInterval(checkStatusInterval);
