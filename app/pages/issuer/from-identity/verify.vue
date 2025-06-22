@@ -190,15 +190,8 @@ function redirectToCredentialGeneration(): void {
   console.log("Redirecting to credential generation...");
 }
 
-definePageMeta({ layout: "leo-inc" });
+definePageMeta({ layout: "c4dt" });
 useHead({
-  title: "Leo Inc. HR - Employees",
-  meta: [
-    {
-      name: "description",
-      content:
-        "Manage Employee Information and maintain their contact information.",
-    },
-  ],
+  title: "C4DT E-ID Workshop - Verify Identity",
 });
 </script>

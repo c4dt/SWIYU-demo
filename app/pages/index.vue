@@ -1,7 +1,7 @@
 <template>
   <section class="bg-white py-24 sm:py-8">
     <div class="mx-auto max-w-7xl px-6 lg:px-8">
-      <header class="mx-auto max-w-2xl lg:text-center">
+      <header class="mx-auto max-w-2xl text-center">
         <h1 class="text-base font-semibold leading-7 text-indigo-600">
           E-ID Demo
         </h1>
@@ -9,82 +9,84 @@
           A demo app portraying the process of Verifiable Credential exchange
         </p>
         <p class="mt-6 text-lg leading-8 text-gray-600">
-          The demo includes simple issuer and verifier developed specifically for the
-          SWIYU project, which is a part of the E-ID initiative by the Swiss Federal Office of Information Technology,
-          Systems and Telecommunication (FOITT).
+          The demo includes a simple issuer and verifier built for the SWIYU
+          project, part of the Swiss E-ID initiative by FOITT.
         </p>
       </header>
 
-      <dl
-        class="mx-auto mt-16 grid max-w-xl grid-cols-1 gap-x-8 gap-y-10 sm:mt-20 lg:mt-24 lg:max-w-4xl lg:grid-cols-2 lg:gap-y-16">
-        <div v-for="feature in features" :key="feature.name" class="relative pl-16">
+      <dl class="mx-auto mt-16 grid max-w-xl grid-cols-1 gap-x-8 gap-y-10
+               sm:mt-20 lg:mt-24 lg:max-w-4xl lg:grid-cols-2 lg:gap-y-16">
+        <div v-for="f in features" :key="f.name" class="relative pl-16">
           <dt class="font-semibold leading-7 text-gray-900">
-            <div class="absolute left-0 top-0 flex h-10 w-10 items-center justify-center rounded-lg bg-indigo-600">
-              <component :is="feature.icon" class="h-6 w-6 text-white" aria-hidden="true" />
+            <div class="absolute left-0 top-0 flex h-10 w-10 items-center justify-center rounded-lg
+                     bg-indigo-600 transition-transform motion-safe:hover:scale-105">
+              <component :is="f.icon" class="h-6 w-6 text-white" aria-hidden="true" />
             </div>
-            <NuxtLink :to="feature.url" class="hover:text-indigo-600 transition-colors">
-              {{ feature.name }}
+            <NuxtLink :to="f.url" class="outline-none focus-visible:ring-2 focus-visible:ring-indigo-400
+                     hover:text-indigo-600 transition-colors">
+              {{ f.name }}
             </NuxtLink>
           </dt>
+
           <dd class="mt-2 leading-7 text-gray-600">
-            {{ feature.description }}
+            {{ f.description }}
           </dd>
         </div>
       </dl>
     </div>
   </section>
 </template>
-<script setup>
-import {
-  ArrowPathIcon,
-  CloudArrowUpIcon,
-  FingerPrintIcon,
-  LockClosedIcon,
-} from "@heroicons/vue/24/outline";
+<script setup lang="ts">
 
-useHead({
-  title: "E-ID Demo",
-  meta: [
-    {
-      name: "description",
-      content:
-        "A simple app portraying the process of Verifiable Credential exchange.",
-    },
-  ],
-});
+import { ArrowPathIcon, CloudArrowUpIcon, FingerPrintIcon, LockClosedIcon } from '@heroicons/vue/24/outline'
+
+type ExternalUrl = `http${'s' | ''}://${string}`
+type InternalUrl = `/${string}`
+
+interface Feature {
+  readonly name: string
+  readonly description: string
+  readonly url: ExternalUrl | InternalUrl
+  readonly icon: Component
+}
+
 const features = [
   {
-    name: "Issuer",
+    name: 'Issuer',
     description:
-      "An actor that issues the credentials by sharing them in a standard format" +
-      " signing them. In our example, the issuer is C4DT." +
-      "The public key and the schemas used by the issuer are stored on the ledger.",
+      `An actor that issues credentials in a standard format and signs them.
+       In this demo the issuer is C4DT. Public key + schemas live on-ledger.`,
     icon: CloudArrowUpIcon,
-    url: "/issuer",
+    url: '/issuer',
   },
   {
-    name: "Base & Trust Registries",
+    name: 'Base & Trust Registries',
     description:
-      "Reposible for storing the public keys/ DIDs of the actors, and revocation registries." +
-      "The trust registry is responsible for certifying the authenticity of the actors.",
+      `Stores public keys / DIDs and revocation registries.
+       The trust registry certifies actor authenticity.`,
     icon: LockClosedIcon,
-    url: "https://swiyu-admin-ch.github.io/introduction/#registries",
+    url: 'https://swiyu-admin-ch.github.io/introduction/#registries',
   },
   {
-    name: "Wallet",
+    name: 'Wallet',
     description:
-      "The wallet is an application installed by the user which stores their credentials." +
-      "It also prepares the credentials and presents them to the verifier." +
-      "In our example, the wallet holds the diplomas of the student.",
+      `User application that stores and presents credentials.
+       In this demo the wallet holds the student’s diplomas.`,
     icon: ArrowPathIcon,
-    url: "https://swiyu-admin-ch.github.io/open-source-components/#swiyu-android--ios-app",
+    url: 'https://swiyu-admin-ch.github.io/open-source-components/#swiyu-android--ios-app',
   },
   {
-    name: "Verifier",
-    description:
-      "An actor that verifies credentials. In our example, the verifier is Leo Inc.",
+    name: 'Verifier',
+    description: 'Actor that verifies credentials by connecting to the wallet, issuers, and the public registries.',
     icon: FingerPrintIcon,
-    url: "/verifier",
-  },
-];
+    url: '/verifier',
+  }
+] as const satisfies ReadonlyArray<Feature>
+
+definePageMeta({ title: 'E-ID Demo' })
+useSeoMeta({
+  title: 'E-ID Demo',
+  description:
+    'A simple app portraying the process of Verifiable Credential exchange.'
+})
 </script>
