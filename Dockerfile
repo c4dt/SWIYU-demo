@@ -1,6 +1,5 @@
 FROM oven/bun AS base
 
-# Set the working directory
 WORKDIR /app
 
 # install dependencies into temp directory
@@ -16,7 +15,4 @@ COPY --from=install /temp/dev/node_modules node_modules
 COPY --from=install /temp/dev/.nuxt .nuxt
 COPY . .
 
-
-# RUN bun install 
-
-CMD ["bun", "run", "dev", "-o"]
+CMD ["bun", "run", "dev",  "--host", "0.0.0.0", "--port", "3000"]
