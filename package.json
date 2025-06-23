@@ -1,7 +1,21 @@
 {
   "name": "nuxt-app",
+  "dependencies": {
+    "@headlessui/vue": "^1.7.23",
+    "@heroicons/vue": "^2.2.0",
+    "@nuxt/devtools": "^2.5.0",
+    "@nuxt/eslint": "^1.4.1",
+    "@nuxt/image": "^1.10.0",
+    "@tailwindcss/vite": "^4.1.10",
+    "axios": "^1.10.0",
+    "eslint": "^9.29.0",
+    "nuxt": "^3.17.5",
+    "qrcode.vue": "^3.6.0",
+    "tailwindcss": "^4.1.10",
+    "vue": "^3.5.17",
+    "vue-router": "^4.5.1"
+  },
   "private": true,
-  "type": "module",
   "scripts": {
     "build": "nuxt build",
     "dev": "nuxt dev",
@@ -11,21 +25,17 @@
     "typecheck": "bun --bun vue-tsc --noEmit",
     "lint": "eslint .",
     "lint:fix": "eslint --fix .",
-    "format": "prettier --check .",
-    "format:fix": "prettier --write ."
+    "prettify": "prettier --check .",
+    "prettify:fix": "prettier --write .",
+    "format": "bun run lint:fix || true && bun run prettify:fix"
   },
-  "dependencies": {
-    "@headlessui/vue": "^1.7.23",
-    "@heroicons/vue": "^2.2.0",
-    "@nuxt/devtools": "^2.5.0",
-    "@nuxt/image": "^1.10.0",
-    "@tailwindcss/vite": "^4.1.10",
-    "axios": "^1.10.0",
-    "nuxt": "^3.17.5",
-    "qrcode.vue": "^3.6.0",
-    "tailwindcss": "^4.1.10",
+  "type": "module",
+  "devDependencies": {
+    "eslint-plugin-prettier": "^5.5.0",
+    "prettier": "^3.6.0",
+    "prettier-plugin-organize-imports": "^4.1.0",
+    "prettier-plugin-tailwindcss": "^0.6.13",
     "typescript": "^5.8.3",
-    "vue": "^3.5.17",
-    "vue-router": "^4.5.1"
+    "vue-tsc": "^2.2.10"
   }
 }

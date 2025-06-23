@@ -19,8 +19,8 @@ export default defineNuxtConfig({
     }
   },
 
-  css: ["~/assets/css/main.css"],
-  modules: ["@nuxt/image"],
+  css: ['~/assets/css/main.css'],
+  modules: ['@nuxt/image', '@nuxt/eslint'],
 
   runtimeConfig: {
     public: {
