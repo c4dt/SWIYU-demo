@@ -38,7 +38,7 @@ services:
 
   logviewer:
     image: mthenw/frontail:latest
-    command: --url-path /logs --lines 300 /logs/access.log /logs/error.log
+    command: --url-path /logs --number 1000 /logs/access.log /logs/error.log
     volumes:
       - logs:/logs
     networks:
