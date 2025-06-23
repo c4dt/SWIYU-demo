@@ -57,12 +57,6 @@ definePageMeta({
 });
 const pages = ref([
   {
-    title: "Employee Management",
-    url: "/verifier/employees",
-    description:
-      "Manages Employee Information and maintains their contact information.",
-  },
-  {
     title: "Hiring",
     url: "/verifier/verify",
     description:

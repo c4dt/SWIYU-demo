@@ -105,11 +105,6 @@ const route = useRoute();
 const navigation = computed<NavigationItem[]>(() => [
   { name: "Home", href: "/verifier", current: route.name === "verifier-home" },
   {
-    name: "Employees",
-    href: "/verifier/employees",
-    current: route.name === "verifier-employees",
-  },
-  {
     name: "Hiring",
     href: "/verifier/verify",
     current: route.name === "verifier-verify",
