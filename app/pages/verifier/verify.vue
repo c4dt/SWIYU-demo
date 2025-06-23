@@ -111,6 +111,7 @@
             The holder has successfully verified their credential.
           </p>
         </div>
+        <KeyValueDisplay :data="disclosedData" />
       </div>
       <div
         v-if="step === Step.VERIFICATION_FAILED"
