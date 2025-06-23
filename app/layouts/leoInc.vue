@@ -2,13 +2,13 @@
   <div class="min-h-full bg-gray-100">
     <nav class="bg-gray-800">
       <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div class="flex justify-between h-16 items-center">
+        <div class="flex h-16 items-center justify-between">
           <!-- Logo and Desktop Navigation -->
           <div class="flex items-center">
             <NuxtImg
               src="/images/leo_inc_logo.svg"
               alt="Leo Inc Logo"
-              class="w-60 mt-6"
+              class="mt-6 w-60"
             />
             <div class="ml-10 flex space-x-4">
               <a
@@ -80,50 +80,54 @@
 </template>
 
 <script setup lang="ts">
-import { computed } from "vue";
-import { useRoute } from "vue-router";
-import { Menu, MenuButton, MenuItems, MenuItem } from "@headlessui/vue";
-import { BellIcon } from "@heroicons/vue/24/outline";
+  import { Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/vue';
+  import { BellIcon } from '@heroicons/vue/24/outline';
+  import { computed } from 'vue';
+  import { useRoute } from 'vue-router';
 
-interface NavigationItem {
-  name: string;
-  href: string;
-  current: boolean;
-}
-interface User {
-  name: string;
-  email: string;
-  imageUrl: string;
-}
-interface UserNavItem {
-  name: string;
-  href: string;
-}
+  interface NavigationItem {
+    name: string;
+    href: string;
+    current: boolean;
+  }
+  interface User {
+    name: string;
+    email: string;
+    imageUrl: string;
+  }
+  interface UserNavItem {
+    name: string;
+    href: string;
+  }
 
-const route = useRoute();
+  const route = useRoute();
 
-const navigation = computed<NavigationItem[]>(() => [
-  { name: "Home", href: "/verifier", current: route.name === "verifier-home" },
-  {
-    name: "Hiring",
-    href: "/verifier/verify",
-    current: route.name === "verifier-verify",
-  },
-]);
+  const navigation = computed<NavigationItem[]>(() => [
+    {
+      name: 'Home',
+      href: '/verifier',
+      current: route.name === 'verifier-home',
+    },
+    {
+      name: 'Hiring',
+      href: '/verifier/verify',
+      current: route.name === 'verifier-verify',
+    },
+  ]);
 
-const user: User = {
-  name: "HR guy",
-  email: "guy@leoinc.com",
-  imageUrl: "https://flowbite.com/docs/images/people/profile-picture-1.jpg",
-};
-const userNavigation: UserNavItem[] = [
-  { name: "Your Profile", href: "#" },
-  { name: "Settings", href: "#" },
-  { name: "Sign out", href: "#" },
-];
+  const user: User = {
+    name: 'HR guy',
+    email: 'guy@leoinc.com',
+    imageUrl: 'https://flowbite.com/docs/images/people/profile-picture-1.jpg',
+  };
+  const userNavigation: UserNavItem[] = [
+    { name: 'Your Profile', href: '#' },
+    { name: 'Settings', href: '#' },
+    { name: 'Sign out', href: '#' },
+  ];
 
-const navItemClass = (isCurrent: boolean) =>
-  isCurrent
-    ? "bg-gray-900 text-white rounded-md px-3 py-2 text-sm font-medium"
-    : "text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium";
+  const navItemClass = (isCurrent: boolean) =>
+    isCurrent
+      ? 'bg-gray-900 text-white rounded-md px-3 py-2 text-sm font-medium'
+      : 'text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium';
 </script>

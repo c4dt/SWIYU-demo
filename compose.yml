@@ -5,11 +5,11 @@ services:
   postgres:
     image: postgres:latest
     environment:
-      POSTGRES_USER: "issuer_mgmt_user"
-      POSTGRES_PASSWORD: "secret"
-      POSTGRES_DB: "issuer_db"
+      POSTGRES_USER: 'issuer_mgmt_user'
+      POSTGRES_PASSWORD: 'secret'
+      POSTGRES_DB: 'issuer_db'
     healthcheck:
-      test: [ "CMD-SHELL", "pg_isready -U issuer_mgmt_user -d issuer_db" ]
+      test: ['CMD-SHELL', 'pg_isready -U issuer_mgmt_user -d issuer_db']
       interval: 5s
       timeout: 5s
       retries: 5
@@ -24,7 +24,7 @@ services:
     #     max-size: "10m"
     #     max-file: "3"
     ports:
-      - "80:80"
+      - '80:80'
     env_file: .env
     volumes:
       - ./nginx.conf:/usr/local/openresty/nginx/conf/nginx.conf:ro
@@ -44,8 +44,8 @@ services:
     build: .
     volumes:
       - .:/app
-      - /app/node_modules  # Leave node_modules solely inside the container
-      - /app/.nuxt  # Leave node_modules solely inside the container
+      - /app/node_modules # Leave node_modules solely inside the container
+      - /app/.nuxt # Leave node_modules solely inside the container
 
   issuer-agent-management:
     image: ghcr.io/swiyu-admin-ch/eidch-issuer-agent-management:latest
@@ -67,13 +67,13 @@ services:
 
       # Default settings for the application. Only change these if you know what you are doing
       LOGGING_LEVEL_CH_ADMIN_BIT_EID: DEBUG
-      SWIYU_STATUS_REGISTRY_AUTH_ENABLE_REFRESH_TOKEN_FLOW: "true"
+      SWIYU_STATUS_REGISTRY_AUTH_ENABLE_REFRESH_TOKEN_FLOW: 'true'
 
       # Persistence
-      POSTGRES_USER: "issuer_mgmt_user"
-      POSTGRES_PASSWORD: "secret"
-      POSTGRES_DB: "issuer_db"
-      POSTGRES_JDBC: "jdbc:postgresql://postgres:5432/issuer_db"
+      POSTGRES_USER: 'issuer_mgmt_user'
+      POSTGRES_PASSWORD: 'secret'
+      POSTGRES_DB: 'issuer_db'
+      POSTGRES_JDBC: 'jdbc:postgresql://postgres:5432/issuer_db'
     depends_on:
       - postgres
 
@@ -86,15 +86,15 @@ services:
       SDJWT_KEY: ${SDJWT_KEY}
 
       # Default settings for the application. Only change these if you know what you are doing
-      OPENID_CONFIG_FILE: "file:/cfg-files/openid_metadata.json"
-      METADATA_CONFIG_FILE: "file:/cfg-files/issuer_metadata.json"
+      OPENID_CONFIG_FILE: 'file:/cfg-files/openid_metadata.json'
+      METADATA_CONFIG_FILE: 'file:/cfg-files/issuer_metadata.json'
       TOKEN_TTL: 600
 
       # Persistence
-      POSTGRES_USER: "issuer_mgmt_user"
-      POSTGRES_PASSWORD: "secret"
-      POSTGRES_DB: "issuer_db"
-      POSTGRES_JDBC: "jdbc:postgresql://postgres:5432/issuer_db"
+      POSTGRES_USER: 'issuer_mgmt_user'
+      POSTGRES_PASSWORD: 'secret'
+      POSTGRES_DB: 'issuer_db'
+      POSTGRES_JDBC: 'jdbc:postgresql://postgres:5432/issuer_db'
     configs:
       - source: issuer_metadata
         target: /cfg-files/issuer_metadata.json
@@ -106,13 +106,13 @@ services:
   verifier_postgres:
     image: postgres:latest
     environment:
-      POSTGRES_USER: "verifier_mgmt_user"
-      POSTGRES_PASSWORD: "secret"
-      POSTGRES_DB: "verifier_db"
+      POSTGRES_USER: 'verifier_mgmt_user'
+      POSTGRES_PASSWORD: 'secret'
+      POSTGRES_DB: 'verifier_db'
     ports:
-      - "5435:5432"
+      - '5435:5432'
     healthcheck:
-      test: [ "CMD-SHELL", "pg_isready -U verifier_mgmt_user -d verifier_db" ]
+      test: ['CMD-SHELL', 'pg_isready -U verifier_mgmt_user -d verifier_db']
       interval: 5s
       timeout: 5s
       retries: 5
@@ -122,12 +122,12 @@ services:
     environment:
       OID4VP_URL: ${OID4VP_URL}
       # Persistence
-      POSTGRES_USER: "verifier_mgmt_user"
-      POSTGRES_PASSWORD: "secret"
-      POSTGRES_DB: "verifier_db"
-      POSTGRES_JDBC: "jdbc:postgresql://verifier_postgres:5432/verifier_db"
+      POSTGRES_USER: 'verifier_mgmt_user'
+      POSTGRES_PASSWORD: 'secret'
+      POSTGRES_DB: 'verifier_db'
+      POSTGRES_JDBC: 'jdbc:postgresql://verifier_postgres:5432/verifier_db'
     ports:
-      - "8082:8080"
+      - '8082:8080'
     depends_on:
       - verifier_postgres
 
@@ -137,7 +137,7 @@ services:
       - source: verifier_metadata
         target: /verifier_metadata.json
     ports:
-      - "8083:8080"
+      - '8083:8080'
     environment:
       EXTERNAL_URL: ${OID4VP_EXTERNAL_URL}
       OPENID_CLIENT_METADATA_FILE: ${OPENID_CLIENT_METADATA_FILE}
@@ -147,10 +147,10 @@ services:
       SIGNING_KEY: ${SIGNING_KEY}
 
       # Persistence
-      POSTGRES_USER: "verifier_mgmt_user"
-      POSTGRES_PASSWORD: "secret"
-      POSTGRES_DB: "verifier_db"
-      POSTGRES_JDBC: "jdbc:postgresql://verifier_postgres:5432/verifier_db"
+      POSTGRES_USER: 'verifier_mgmt_user'
+      POSTGRES_PASSWORD: 'secret'
+      POSTGRES_DB: 'verifier_db'
+      POSTGRES_JDBC: 'jdbc:postgresql://verifier_postgres:5432/verifier_db'
 
 volumes:
   db_data:
