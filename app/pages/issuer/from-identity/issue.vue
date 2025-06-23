@@ -69,7 +69,28 @@
 
   const stage = ref<Stage>(Stage.CREDENTIAL_FORM);
   const CredentialData = ref<DiplomaSchema>({} as DiplomaSchema);
-  const logMessages = ref<ActionLog[]>([]);
+  const logMessages = ref<ActionLog[]>([
+    {
+      message: 'Verification request created',
+      source: 'Verifier',
+    },
+    {
+      message: 'Checking periodically for user scanning.',
+      source: 'Verifier',
+    },
+    {
+      message: 'Verifies DID of verifier through base registry!',
+      source: 'Wallet',
+    },
+    {
+      message: 'retrieves verified actor status from trust registry!',
+      source: 'Wallet',
+    },
+    {
+      message: 'received VC with a valid signature!',
+      source: 'Verifier',
+    },
+  ]);
 
   function createCredentialData(createdCredential: DiplomaSchema): void {
     CredentialData.value = createdCredential;
