@@ -184,14 +184,14 @@ configs:
         "version": "1.0",
         "display": [
           {
-            "name": "Monsters Uni.",
-            "locale": "de-CH",
+            "name": "C4DT",
+            "locale": "fr-CH",
             "logo": {
               "uri": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAIAAADYYG7QAAABD0lEQVR4nOyYsUrEQBRFVQYRYYUtZi0UC0vFUrBeYW1sF2E/wU623P8RkTSCf7FFipDaIkxhmkyapBgCYivz5sKAmynuaS9vOPDgcRlVXl/spcTB2AJ/oRCCQggKIVT8pJ4pfeqNnKmG1u5aaLpc6ecXb2Q26/Yji3s2uZVRCEEhBIUQFEKIl1rp2XS5Ckwe395J0WS+ODw7l1JX1zZ7ldJ9qVMfXd1cvn8GhKLpy+Lr6VFKk1sZhRAUQlAIIR5GZyqzWQcmJ/PFyf2DN2qyty7fSoODbWKEhtaGe/HvLRaEunzLTv1vUAhBIQSFEPGfDa7+7svCG4VvcRixwo5FciujEIJCCAohkhP6CQAA///lDD1tMy8HCAAAAABJRU5ErkJggg=="
             }
           },
           {
-            "name": "Monsters Uni.",
+            "name": "C4DT",
             "locale": "en-US",
             "logo": {
               "uri": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAIAAADYYG7QAAABD0lEQVR4nOyYsUrEQBRFVQYRYYUtZi0UC0vFUrBeYW1sF2E/wU623P8RkTSCf7FFipDaIkxhmkyapBgCYivz5sKAmynuaS9vOPDgcRlVXl/spcTB2AJ/oRCCQggKIVT8pJ4pfeqNnKmG1u5aaLpc6ecXb2Q26/Yji3s2uZVRCEEhBIUQFEKIl1rp2XS5Ckwe395J0WS+ODw7l1JX1zZ7ldJ9qVMfXd1cvn8GhKLpy+Lr6VFKk1sZhRAUQlAIIR5GZyqzWQcmJ/PFyf2DN2qyty7fSoODbWKEhtaGe/HvLRaEunzLTv1vUAhBIQSFEPGfDa7+7svCG4VvcRixwo5FciujEIJCCAohkhP6CQAA///lDD1tMy8HCAAAAABJRU5ErkJggg=="
@@ -199,7 +199,7 @@ configs:
           }
         ],
         "credential_configurations_supported": {
-          "monsters-uni": {
+          "e-id-how-06-2025": {
             "format": "vc+sd-jwt",
             "cryptographic_binding_methods_supported": [
               "did:jwk"
@@ -216,27 +216,41 @@ configs:
             },
             "display": [
               {
-                "name": "Monsters Uni.",
-                "locale": "de-CH",
+                "name": "C4DT E-ID hands-on workshop June 2025",
+                "locale": "fr-CH",
                 "logo": {
                   "uri": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAIAAADYYG7QAAABD0lEQVR4nOyYsUrEQBRFVQYRYYUtZi0UC0vFUrBeYW1sF2E/wU623P8RkTSCf7FFipDaIkxhmkyapBgCYivz5sKAmynuaS9vOPDgcRlVXl/spcTB2AJ/oRCCQggKIVT8pJ4pfeqNnKmG1u5aaLpc6ecXb2Q26/Yji3s2uZVRCEEhBIUQFEKIl1rp2XS5Ckwe395J0WS+ODw7l1JX1zZ7ldJ9qVMfXd1cvn8GhKLpy+Lr6VFKk1sZhRAUQlAIIR5GZyqzWQcmJ/PFyf2DN2qyty7fSoODbWKEhtaGe/HvLRaEunzLTv1vUAhBIQSFEPGfDa7+7svCG4VvcRixwo5FciujEIJCCAohkhP6CQAA///lDD1tMy8HCAAAAABJRU5ErkJggg=="
                 },
-                "description": "Das ist ein Test-VC",
+                "description": "Certificat de participation à l'atelier pratique C4DT E-ID juin 2025",
                 "background_color": "#ff69b4"
               },
               {
-                "name": "Monsters Uni.",
+                "name": "C4DT E-ID hands-on workshop June 2025",
                 "locale": "en-US",
                 "logo": {
                   "uri": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAIAAADYYG7QAAABD0lEQVR4nOyYsUrEQBRFVQYRYYUtZi0UC0vFUrBeYW1sF2E/wU623P8RkTSCf7FFipDaIkxhmkyapBgCYivz5sKAmynuaS9vOPDgcRlVXl/spcTB2AJ/oRCCQggKIVT8pJ4pfeqNnKmG1u5aaLpc6ecXb2Q26/Yji3s2uZVRCEEhBIUQFEKIl1rp2XS5Ckwe395J0WS+ODw7l1JX1zZ7ldJ9qVMfXd1cvn8GhKLpy+Lr6VFKk1sZhRAUQlAIIR5GZyqzWQcmJ/PFyf2DN2qyty7fSoODbWKEhtaGe/HvLRaEunzLTv1vUAhBIQSFEPGfDa7+7svCG4VvcRixwo5FciujEIJCCAohkhP6CQAA///lDD1tMy8HCAAAAABJRU5ErkJggg=="
                 },
-                "description": "This is an test vc",
+                "description": "Certificate of attendance for the C4DT E-ID hands-on workshop June 2025",
                 "background_color": "#4A412A"
               }
             ],
-              "vct": "monsters-uni",
+              "vct": "e-id-how-06-2025",
             "claims": {
-              "signee": {
+              "firstName": {
+                "mandatory": true,
+                "value_type": "string",
+                "display": [
+                  {
+                    "locale": "fr-CH",
+                    "name": "prenom"
+                  },
+                  {
+                    "locale": "en-US",
+                    "name": "First Name"
+                  }
+                ]
+              },
+              "lastName": {
                 "mandatory": true,
                 "value_type": "string",
                 "display": [
@@ -246,73 +260,74 @@ configs:
                   },
                   {
                     "locale": "en-US",
-                    "name": "Signee"
+                    "name": "Family Name"
                   }
                 ]
               },
-              "degree": {
-                "mandatory": false,
+              "birthDate": {
+                "mandatory": true,
                 "value_type": "string",
                 "display": [
                   {
                     "locale": "fr-CH",
-                    "name": "degree"
+                    "name": "date de naissance"
                   },
                   {
                     "locale": "en-US",
-                    "name": "degree"
+                    "name": "Date of Birth"
                   }
                 ]
               },
-              "document_number": {
+              "dateOfIssue": {
                 "mandatory": true,
                 "value_type": "string",
                 "display": [
                   {
                     "locale": "fr-CH",
-                    "name": "numéro de document"
+                    "name": "la date d'émission"
                   },
                   {
                     "locale": "en-GB",
-                    "name": "document number"
+                    "name": "Date of Issue"
                   }
                 ]
               },
-              "subject": {
+              "betaIdDocumentNumber": {
                 "mandatory": true,
                 "value_type": "string",
                 "display": [
                   {
                     "locale": "fr-CH",
-                    "name": "subjet"
+                    "name": "Numéro de document BETA ID"
                   },
                   {
-                    "locale": "en-GB",
-                    "name": "Subject"
+                    "locale": "en-US",
+                    "name": "BETA ID Document Number"
                   }
                 ]
               },
-              "date_of_issue": {
+              "betaIdCnf" : {
                 "mandatory": true,
                 "value_type": "string",
                 "display": [
                   {
                     "locale": "fr-CH",
-                    "name": "numéro de document"
+                    "name": "BETA ID CNF"
                   },
                   {
-                    "locale": "en-GB",
-                    "name": "document number"
+                    "locale": "en-US",
+                    "name": "BETA ID CNF"
                   }
                 ]
               }
             },
             "order": [
-              "signee",
-              "degree",
-              "document_number",
-              "subject",
-              "date_of_issue"
+              "firstName",
+              "lastName",
+              "birthDate",
+              "dateOfIssue",
+              "betaIdDocumentNumber",
+              "betaIdCnf"
             ]
           }
         }
