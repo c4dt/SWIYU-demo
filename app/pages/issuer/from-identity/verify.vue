@@ -106,7 +106,6 @@
             The holder has successfully verified their credential.
           </p>
         </div>
-        <KeyValueDisplay :data="disclosedData" />
         <div class="mt-6 flex items-center justify-center gap-x-6">
           <button
             type="button"
