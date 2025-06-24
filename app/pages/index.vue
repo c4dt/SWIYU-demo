@@ -11,8 +11,8 @@
           A demo app portraying the process of Verifiable Credential exchange
         </p>
         <p class="mt-6 text-lg leading-8 text-gray-600">
-          The demo includes a simple issuer and verifier built for the SWIYU
-          project, part of the Swiss E-ID initiative by FOITT.
+          This app is prepared as a demo for the C4DT e-ID workshop held on June
+          25th 2025.
         </p>
       </header>
 
@@ -21,19 +21,20 @@
       >
         <div v-for="f in features" :key="f.name" class="relative pl-16">
           <dt class="leading-7 font-semibold text-gray-900">
-            <div
-              class="absolute top-0 left-0 flex h-10 w-10 items-center justify-center rounded-lg bg-indigo-600 transition-transform motion-safe:hover:scale-105"
-            >
-              <component
-                :is="f.icon"
-                class="h-6 w-6 text-white"
-                aria-hidden="true"
-              />
-            </div>
             <NuxtLink
               :to="f.url"
               class="transition-colors outline-none hover:text-indigo-600 focus-visible:ring-2 focus-visible:ring-indigo-400"
             >
+              <div
+                class="absolute top-0 left-0 flex h-10 w-10 items-center justify-center rounded-lg bg-indigo-600 transition-transform motion-safe:hover:scale-105"
+              >
+                <component
+                  :is="f.icon"
+                  class="h-6 w-6 text-white"
+                  aria-hidden="true"
+                />
+              </div>
+
               {{ f.name }}
             </NuxtLink>
           </dt>
@@ -48,10 +49,9 @@
 </template>
 <script setup lang="ts">
   import {
-    ArrowPathIcon,
     CloudArrowUpIcon,
+    DocumentTextIcon,
     FingerPrintIcon,
-    LockClosedIcon,
   } from '@heroicons/vue/24/outline';
 
   type ExternalUrl = `http${'s' | ''}://${string}`;
@@ -70,28 +70,20 @@
       description: `An actor that issues credentials in a standard format and signs them.
        In this demo the issuer is C4DT. Public key + schemas live on-ledger.`,
       icon: CloudArrowUpIcon,
-      url: '/issuer',
-    },
-    {
-      name: 'Base & Trust Registries',
-      description: `Stores public keys / DIDs and revocation registries.
-       The trust registry certifies actor authenticity.`,
-      icon: LockClosedIcon,
-      url: 'https://swiyu-admin-ch.github.io/introduction/#registries',
-    },
-    {
-      name: 'Wallet',
-      description: `User application that stores and presents credentials.
-       In this demo the wallet holds the student’s diplomas.`,
-      icon: ArrowPathIcon,
-      url: 'https://swiyu-admin-ch.github.io/open-source-components/#swiyu-android--ios-app',
+      url: '/issuer/from-identity/verify',
     },
     {
       name: 'Verifier',
       description:
         'Actor that verifies credentials by connecting to the wallet, issuers, and the public registries.',
       icon: FingerPrintIcon,
-      url: '/verifier',
+      url: '/verifier/verify',
+    },
+    {
+      name: 'Doucumentation',
+      description: `Supplementary information about the demo, including how to run it locally and the underlying architecture.`,
+      icon: DocumentTextIcon,
+      url: 'https://github.com/c4dt/how-2025-06-eID',
     },
   ] as const satisfies ReadonlyArray<Feature>;
 

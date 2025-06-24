@@ -15,6 +15,7 @@
     <div class="mt-12 grid grid-cols-1 gap-2 sm:grid-cols-2 lg:mt-20">
       <nuxt-link
         v-for="page in pages"
+        :key="page.title"
         :href="page.url"
         class="group relative z-40 m-2 bg-white p-4 transition-all duration-1000 hover:bg-blue-500 hover:shadow-xl"
       >

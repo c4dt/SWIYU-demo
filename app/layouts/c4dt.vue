@@ -5,7 +5,7 @@
         <div class="flex h-16 items-center justify-between">
           <div class="flex items-center">
             <div class="flex-shrink-0">
-              <a href="/issuer">
+              <a href="/">
                 <NuxtImg class="w-60" src="/images/c4dt.svg" alt="C4DT logo" />
               </a>
             </div>
@@ -28,59 +28,6 @@
               </NuxtLink>
             </div>
           </div>
-
-          <div class="flex items-center">
-            <button
-              type="button"
-              class="relative mr-3 rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800 focus:outline-none"
-              @click="handleNotificationsClick"
-            >
-              <span class="sr-only">View notifications</span>
-              <BellIcon class="h-6 w-6" aria-hidden="true" />
-            </button>
-
-            <!-- Profile dropdown -->
-            <Menu as="div" class="relative">
-              <MenuButton
-                class="relative flex max-w-xs items-center rounded-full bg-gray-800 text-sm focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800 focus:outline-none"
-              >
-                <span class="sr-only">Open user menu</span>
-                <NuxtImg
-                  class="w-12 rounded-full"
-                  :src="user.imageUrl"
-                  alt="profile picture"
-                />
-              </MenuButton>
-              <transition
-                enter-active-class="transition ease-out duration-100"
-                enter-from-class="transform opacity-0 scale-95"
-                enter-to-class="transform opacity-100 scale-100"
-                leave-active-class="transition ease-in duration-75"
-                leave-from-class="transform opacity-100 scale-100"
-                leave-to-class="transform opacity-0 scale-95"
-              >
-                <MenuItems
-                  class="ring-opacity-5 absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black focus:outline-none"
-                >
-                  <MenuItem
-                    v-for="item in userNavigation"
-                    :key="item.name"
-                    v-slot="{ active }"
-                  >
-                    <NuxtLink
-                      :to="item.path"
-                      :class="[
-                        active ? 'bg-gray-100' : '',
-                        'block px-4 py-2 text-sm text-gray-700',
-                      ]"
-                    >
-                      {{ item.name }}
-                    </NuxtLink>
-                  </MenuItem>
-                </MenuItems>
-              </transition>
-            </Menu>
-          </div>
         </div>
       </div>
     </nav>
@@ -94,59 +41,24 @@
 </template>
 
 <script setup lang="ts">
-  import { Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/vue';
-  import { BellIcon } from '@heroicons/vue/24/outline';
-
   interface NavItem {
     name: string;
     path: string;
     routeName: string;
   }
 
-  interface UserNavItem {
-    name: string;
-    path: string;
-  }
-
-  interface User {
-    name: string;
-    email: string;
-    imageUrl: string;
-  }
-
   const route = useRoute();
 
-  const user: User = reactive({
-    name: 'Tom Cook',
-    email: 'tom@example.com',
-    imageUrl: '/images/employee.png',
-  });
-
   const navigation: NavItem[] = [
-    { name: 'Home', path: '/issuer', routeName: 'issuer-home' },
+    { name: 'Home', path: '/', routeName: 'home' },
     {
-      name: 'Certification',
-      path: '/issuer/certification',
-      routeName: 'issuer-certs',
-    },
-    {
-      name: 'Issuance',
+      name: 'E-ID workshop Certificate',
       path: '/issuer/from-identity/verify',
-      routeName: 'issuer-issue',
+      routeName: 'issuer-from-identity',
     },
-  ];
-
-  const userNavigation: UserNavItem[] = [
-    { name: 'Your Profile', path: '/profile' },
-    { name: 'Settings', path: '/settings' },
-    { name: 'Sign out', path: '/signout' },
   ];
 
   const isActiveRoute = (routeName: string): boolean => {
-    return route.name === routeName;
-  };
-
-  const handleNotificationsClick = () => {
-    // Handle notifications logic
+    return route.name.startsWith(routeName);
   };
 </script>

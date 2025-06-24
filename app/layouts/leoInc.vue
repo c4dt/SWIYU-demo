@@ -5,11 +5,13 @@
         <div class="flex h-16 items-center justify-between">
           <!-- Logo and Desktop Navigation -->
           <div class="flex items-center">
-            <NuxtImg
-              src="/images/leo_inc_logo.svg"
-              alt="Leo Inc Logo"
-              class="mt-6 w-60"
-            />
+            <a href="/">
+              <NuxtImg
+                src="/images/leo_inc_logo.svg"
+                alt="Leo Inc Logo"
+                class="mt-6 w-60"
+              />
+            </a>
             <div class="ml-10 flex space-x-4">
               <a
                 v-for="item in navigation"
@@ -21,51 +23,6 @@
                 {{ item.name }}
               </a>
             </div>
-          </div>
-
-          <!-- Notification and Profile -->
-          <div class="ml-4 flex items-center space-x-4">
-            <!-- Notification Button -->
-            <button
-              class="relative p-1 text-gray-400 hover:text-white focus:ring-2 focus:ring-white"
-              type="button"
-              aria-label="View notifications"
-            >
-              <BellIcon class="h-6 w-6" aria-hidden="true" />
-            </button>
-
-            <!-- Profile Menu -->
-            <Menu as="div" class="relative ml-3">
-              <MenuButton
-                class="relative flex items-center rounded-full bg-gray-800 text-sm"
-              >
-                <span class="sr-only">Open user menu</span>
-                <NuxtImg
-                  :src="user.imageUrl"
-                  alt=""
-                  class="w-12 rounded-full"
-                />
-              </MenuButton>
-              <MenuItems
-                class="absolute right-0 z-10 mt-2 w-48 bg-white shadow-lg"
-              >
-                <MenuItem
-                  v-for="item in userNavigation"
-                  :key="item.name"
-                  v-slot="{ active }"
-                >
-                  <a
-                    :href="item.href"
-                    :class="[
-                      'block px-4 py-2 text-sm text-gray-700',
-                      { 'bg-gray-100': active },
-                    ]"
-                  >
-                    {{ item.name }}
-                  </a>
-                </MenuItem>
-              </MenuItems>
-            </Menu>
           </div>
         </div>
       </div>
@@ -80,9 +37,6 @@
 </template>
 
 <script setup lang="ts">
-  import { Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/vue';
-  import { BellIcon } from '@heroicons/vue/24/outline';
-  import { computed } from 'vue';
   import { useRoute } from 'vue-router';
 
   interface NavigationItem {
@@ -90,23 +44,13 @@
     href: string;
     current: boolean;
   }
-  interface User {
-    name: string;
-    email: string;
-    imageUrl: string;
-  }
-  interface UserNavItem {
-    name: string;
-    href: string;
-  }
-
   const route = useRoute();
 
   const navigation = computed<NavigationItem[]>(() => [
     {
       name: 'Home',
-      href: '/verifier',
-      current: route.name === 'verifier-home',
+      href: '/',
+      current: route.name === 'home',
     },
     {
       name: 'Hiring',
@@ -114,17 +58,6 @@
       current: route.name === 'verifier-verify',
     },
   ]);
-
-  const user: User = {
-    name: 'HR guy',
-    email: 'guy@leoinc.com',
-    imageUrl: 'https://flowbite.com/docs/images/people/profile-picture-1.jpg',
-  };
-  const userNavigation: UserNavItem[] = [
-    { name: 'Your Profile', href: '#' },
-    { name: 'Settings', href: '#' },
-    { name: 'Sign out', href: '#' },
-  ];
 
   const navItemClass = (isCurrent: boolean) =>
     isCurrent
