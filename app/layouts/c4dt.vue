@@ -5,7 +5,9 @@
         <div class="flex h-16 items-center justify-between">
           <div class="flex items-center">
             <div class="flex-shrink-0">
-              <NuxtImg class="w-60" src="/images/c4dt.svg" alt="C4DT logo" />
+              <a href="/issuer">
+                <NuxtImg class="w-60" src="/images/c4dt.svg" alt="C4DT logo" />
+              </a>
             </div>
             <div class="ml-10 flex items-baseline space-x-4">
               <NuxtLink

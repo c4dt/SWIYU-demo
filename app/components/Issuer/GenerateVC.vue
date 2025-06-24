@@ -45,7 +45,7 @@
   } from '~/services/swiyu';
 
   const props = defineProps(['credentialData']);
-  const emit = defineEmits(['addToLog']);
+  const emit = defineEmits(['addToLog', 'NotifyVCReceived']);
 
   const signee = computed(
     () => props.credentialData.firstName + ' ' + props.credentialData.lastName
@@ -68,7 +68,7 @@
       if (status === 'IN_PROGRESS') {
         emit('addToLog', 'Credential offer token has been redeemed!');
       } else if (status === 'ISSUED') {
-        emit('addToLog', 'Credential was issued and received by wallet!');
+        emit('NotifyVCReceived');
         clearInterval(checkStatusInterval);
       } else {
         console.log('Still figuring it out...');

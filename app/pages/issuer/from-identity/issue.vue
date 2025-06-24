@@ -29,14 +29,25 @@
   <div class="mt-14 flex min-h-[500px] rounded-xl bg-gray-50 shadow-md">
     <div class="mt-10 ml-10 flex-1 p-4">
       <IssuerGenerateVC
-        v-if="stage !== Stage.CREDENTIAL_FORM"
+        v-if="stage !== Stage.CREDENTIAL_FORM && stage !== Stage.OFFER_ACCEPTED"
         :credential-data="CredentialData"
         @add-to-log="addToLog"
+        @notify-v-c-received="NotifyVCReceived"
       />
       <IssuerDiplomaCredentialForm
+        v-if="stage !== Stage.OFFER_ACCEPTED"
         @diploma-object-created="createCredentialData"
         @add-to-log="addToLog"
       />
+      <div
+        v-if="stage === Stage.OFFER_ACCEPTED"
+        class="text-center text-green-600"
+      >
+        <h2 class="mb-2 text-xl font-semibold">Issuance Succeeded!</h2>
+        <p class="text-sm">
+          The holder has successfully received their credential.
+        </p>
+      </div>
     </div>
 
     <div class="-mt-10 w-72 rounded-md bg-gray-100 p-6 shadow-lg">
@@ -104,5 +115,10 @@
     target?: string
   ): void {
     logMessages.value.push({ source, target, message });
+  }
+
+  function NotifyVCReceived(): void {
+    stage.value = Stage.OFFER_ACCEPTED;
+    addToLog('Credential was issued and received!', 'Wallet');
   }
 </script>
