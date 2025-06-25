@@ -104,6 +104,27 @@
             />
           </div>
         </div>
+        <div class="sm:col-span-2">
+          <label for="degree" class="block text-sm font-medium text-gray-900">
+            Degree
+          </label>
+          <div class="mt-2">
+            <select
+              id="degree"
+              v-model="model.degree"
+              name="degree"
+              class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-gray-300 ring-inset focus:ring-2 focus:ring-indigo-600 focus:ring-inset sm:max-w-xs sm:text-sm"
+            >
+              <option
+                v-for="option in degreeOptions"
+                :key="option"
+                :value="option"
+              >
+                {{ option }}
+              </option>
+            </select>
+          </div>
+        </div>
         <div class="sm:col-span-4">
           <label
             for="betaIdCnf"
@@ -166,6 +187,7 @@
   const model = reactive<DiplomaSchema>({
     firstName: route.query.firstName as string,
     lastName: route.query.lastName as string,
+    degree: '',
     birthDate: route.query.birthDate as string,
     dateOfIssue: new Date().toDateString(),
     betaIdDocumentNumber: route.query.betaIdDocumentNumber as string,

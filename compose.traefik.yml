@@ -341,11 +341,26 @@ configs:
                     "name": "BETA ID CNF"
                   }
                 ]
+              },
+              "degree": {
+                "mandatory": false,
+                "value_type": "string",
+                "display": [
+                  {
+                    "locale": "fr-CH",
+                    "name": "note"
+                  },
+                  {
+                    "locale": "en-US",
+                    "name": "degree"
+                  }
+                ]
               }
             },
             "order": [
               "firstName",
               "lastName",
+              "degree",
               "birthDate",
               "dateOfIssue",
               "betaIdDocumentNumber",

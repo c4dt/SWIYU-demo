@@ -144,6 +144,7 @@
   const fieldOptions = [
     { label: 'First Name', value: 'firstName' },
     { label: 'Last Name', value: 'lastName' },
+    { label: 'Degree', value: 'degree' },
     { label: 'Date of Birth', value: 'birthDate' },
     { label: 'Document Issuance date', value: 'dateOfIssue' },
     { label: 'Gov ID Document Number', value: 'betaIdDocumentNumber' },

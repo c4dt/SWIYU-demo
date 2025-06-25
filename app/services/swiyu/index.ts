@@ -11,6 +11,7 @@ export async function createSwiyuCredential(
     credential_subject_data: {
       firstName: credentialData.firstName,
       lastName: credentialData.lastName,
+      degree: credentialData.degree,
       birthDate: credentialData.birthDate,
       dateOfIssue: credentialData.dateOfIssue,
       betaIdDocumentNumber: credentialData.betaIdDocumentNumber,
