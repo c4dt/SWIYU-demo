@@ -14,12 +14,18 @@
       />
       <div
         v-if="stage === Stage.OFFER_ACCEPTED"
-        class="text-center text-green-600"
+        class="text-center"
       >
-        <h2 class="mb-2 text-xl font-semibold">Issuance Succeeded!</h2>
-        <p class="text-sm">
+        <h2 class="mb-2 text-xl font-semibold text-green-600">Issuance Succeeded!</h2>
+        <p class="text-sm text-green-600">
           The holder has successfully received their credential.
         </p>
+        <details class="mt-4 flex-1 break-all">
+          <summary class="text-center text-sm font-semibold text-gray-900">
+            Click here to review the credential data
+          </summary>
+          <KeyValueDisplay :data="CredentialData" />
+        </details>
       </div>
     </div>
 

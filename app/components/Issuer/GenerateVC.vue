@@ -1,6 +1,6 @@
 <template>
   <div class="flex flex-col items-center gap-y-8">
-    <div class="flex items-center gap-x-6">
+    <div v-if="!deepLink" class="flex items-center gap-x-6">
       <p>Generate Verifiable Credential for {{ signee }}?</p>
       <button
         type="button"

@@ -84,8 +84,8 @@
             The holder has successfully verified their credential.
           </p>
         </div>
-        <details>
-          <summary class="cursor-pointer text-sm font-semibold">
+        <details class="mt-4 flex-1 break-all">
+          <summary class="cursor-pointer text-sm font-semibold text-center">
             Click here to view the disclosed data
           </summary>
           <KeyValueDisplay :data="disclosedData" />

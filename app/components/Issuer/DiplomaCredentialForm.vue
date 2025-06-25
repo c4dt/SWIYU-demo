@@ -147,13 +147,6 @@
     </section>
     <div class="mt-6 flex items-center justify-end gap-x-6">
       <button
-        type="button"
-        class="text-sm font-semibold text-gray-900"
-        @click="reset"
-      >
-        Cancel
-      </button>
-      <button
         type="submit"
         :disabled="submitting"
         class="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
@@ -162,15 +155,19 @@
       </button>
     </div>
   </form>
-  <div
-    v-else
-    class="container mx-auto my-8 max-w-4xl space-y-2 rounded-lg bg-white p-6 font-medium text-gray-700 shadow-lg"
-  >
-    <p v-for="(value, key) in model" :key="key">
-      {{ key }}:
-      <span class="font-normal">{{ value }}</span>
-    </p>
-  </div>
+  <details v-else>
+    <summary class="text-center text-sm font-semibold text-gray-900 mt-8">
+      Click here to review the form data
+    </summary>
+    <div
+      class="container mx-auto my-8 max-w-4xl space-y-2 rounded-lg bg-white p-6 font-medium text-gray-700 shadow-lg"
+    >
+      <p v-for="(value, key) in model" :key="key">
+        {{ key }}:
+        <span class="font-normal">{{ value }}</span>
+      </p>
+    </div>
+  </details>
 </template>
 
 <script setup lang="ts">
@@ -195,17 +192,6 @@
   });
 
   const submitting = ref(false);
-
-  function reset() {
-    Object.assign(model, {
-      signee: '',
-      documentNumber: '',
-      subject: '',
-      degree: degreeOptions[0],
-      dateOfIssue: '',
-      body: '',
-    });
-  }
 
   async function onSubmit() {
     fillingForm.value = false;
