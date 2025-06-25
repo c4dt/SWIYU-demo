@@ -12,7 +12,7 @@
         </p>
         <p class="mt-6 text-lg leading-8 text-gray-600">
           This app is prepared as a demo for the C4DT e-ID workshop held on June
-          25th 2025.
+          26th 2025.
         </p>
       </header>
 
